@@ -1,7 +1,6 @@
 import chai from 'chai';
 const assert = chai.assert;
 import { travelerData, tripData, destinationData, tripDestinationData, userSpecificData} from '../src/data/sampleData.js';
-
 import TravelerRepo from '../src/TravelerRepo';
 
 describe('TravelerRepo', function() {
