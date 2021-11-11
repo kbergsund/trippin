@@ -254,7 +254,7 @@ const tripDestinationData = [
   }
 ]
 
-const userSpecificData = [
+const travelerSpecificTrips = [
   {
     id: 3,
     userID: 3,
@@ -307,5 +307,5 @@ export {
   tripData,
   destinationData,
   tripDestinationData,
-  userSpecificData
+  travelerSpecificTrips
 }

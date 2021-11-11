@@ -1,5 +1,4 @@
 import Traveler from './Traveler';
-import Trips from './Trips';
 
 export default class TravelerRepo {
   constructor(travelerData, tripData, destinationData) {
@@ -26,9 +25,8 @@ export default class TravelerRepo {
 
   buildTravelers() {
     this.updateTrips();
-    this.allTravelers.map(traveler => {
-      const travelersTrips = new Trips(this.retrieveTravelersTrips(traveler.id));
-      return new Traveler(traveler, travelersTrips);
+    this.allTravelers = this.allTravelers.map(traveler => {
+      return new Traveler(traveler, this.retrieveTravelersTrips(traveler.id));
     })
   }
 }
