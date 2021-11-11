@@ -29,4 +29,6 @@ export default class TravelerRepo {
       return new Traveler(traveler, this.retrieveTravelersTrips(traveler.id));
     })
   }
+
+  //addTrip method?
 }

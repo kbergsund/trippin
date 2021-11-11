@@ -3,12 +3,18 @@ export default class Trips {
     this.trips = tripData;
   }
 
-  // calculateTotalCost() {
-    // add 10% travel agent fee
-    // Round to 2 decimals
-  //   const total = this.trips.reduce((sum, trip) => {
+  calculateTripCost(id) {
+    const trip = this.trips.find(trip => trip.id === id);
+    const flights = trip.travelers * trip.estimatedFlightCostPerPerson;
+    const lodging = trip.duration * trip.estimatedLodgingCostPerDay;
+    const total = flights + lodging;
+    return total + (total * 0.1);
+  }
 
-  //   }, 0)
-  //   return total + (total * 0.1)
-  // }
+  calculateTotalCost() {
+    this.totalCost = this.trips.reduce((sum, trip) => {
+      sum += this.calculateTripCost(trip.id);
+      return sum;
+    }, 0)
+  }
 }
