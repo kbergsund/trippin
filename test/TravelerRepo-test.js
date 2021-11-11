@@ -27,7 +27,6 @@ describe('TravelerRepo', function() {
 
   it('should add destination info to all trips', function() {
     travelerRepo.updateTrips();
-
     assert.deepEqual(travelerRepo.allTrips, tripDestinationData);
   })
 
@@ -35,9 +34,8 @@ describe('TravelerRepo', function() {
     assert.deepEqual(travelerRepo.retrieveTravelersTrips(3), travelerSpecificTrips);
   })
 
-  it('should instantiate all 50 Travelers, each of which should have their specific trips in a Trips object instance', function() {
+  it('should instantiate all Travelers, each of which should have their specific trips in a Trips object instance', function() {
     travelerRepo.buildTravelers();
-
     assert.instanceOf(travelerRepo.allTravelers[0], Traveler)
     assert.deepEqual(travelerRepo.allTravelers[2].myTrips.trips, travelerSpecificTrips);
   })
