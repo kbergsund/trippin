@@ -8,7 +8,7 @@ describe('Traveler', function() {
   let traveler;
 
   beforeEach(function() {
-    traveler = new Traveler(travelerData[0], tripData[0]);
+    traveler = new Traveler(travelerData[0], tripData);
   })
 
   it('should be a function', function() {
@@ -27,6 +27,6 @@ describe('Traveler', function() {
 
   it('should instantiate Trips with trip data', function() {
     assert.instanceOf(traveler.myTrips, Trips);
-    assert.equal(traveler.myTrips.trips, tripData[0]);
+    assert.equal(traveler.myTrips.trips, tripData);
   })
 })
