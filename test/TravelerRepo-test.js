@@ -1,6 +1,6 @@
 import chai from 'chai';
 const assert = chai.assert;
-import { travelerData, tripData, destinationData, tripDestinationData, travelerSpecificTrips} from '../src/data/sampleData.js';
+import { travelerData, tripData, destinationData, tripDestinationData, travelerSpecificTrips } from '../src/data/sampleData.js';
 import TravelerRepo from '../src/TravelerRepo';
 import Traveler from '../src/Traveler';
 
@@ -30,14 +30,20 @@ describe('TravelerRepo', function() {
     assert.deepEqual(travelerRepo.allTrips, tripDestinationData);
   })
 
-  it('should retrieve all trips for specific user given a user ID', function() {
-    assert.deepEqual(travelerRepo.retrieveTravelersTrips(3), travelerSpecificTrips);
+  it('should retrieve all trips for specific user given a traveler ID', function() {
+    console.log(travelerRepo.retrieveTravelersTrips(3));
+    assert.deepEqual(travelerRepo.retrieveTravelersTrips(3)[0], travelerSpecificTrips[2]);
   })
 
   it('should instantiate all Travelers, each of which should have their specific trips in a Trips object instance', function() {
     travelerRepo.buildTravelers();
     assert.instanceOf(travelerRepo.allTravelers[0], Traveler)
     assert.deepEqual(travelerRepo.allTravelers[2].myTrips.trips, travelerSpecificTrips);
+  })
+
+  it('should retrieve a specific traveler given a traveler id', function() {
+    travelerRepo.retrieveTraveler(2);
+    assert.equal(travelerRepo.currentTraveler, travelerRepo.allTravelers[1]);
   })
 
 })

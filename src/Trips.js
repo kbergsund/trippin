@@ -1,8 +1,18 @@
 const dayjs = require('dayjs');
+const isSameOrBefore = require('dayjs/plugin/isSameOrBefore');
+dayjs.extend(isSameOrBefore);
 
 export default class Trips {
   constructor(tripData) {
     this.trips = tripData;
+    this.totalCost = this.calculateTotalCostThisYear(tripData);
+    this.categorizedTrips = this.categorizeTrips(tripData);
+  }
+
+  formatDates(tripData) {
+    tripData.forEach(trip => {
+      trip.date = dayjs(trip.date).format('YYYY/MM/DD');
+    })
   }
 
   calculateTripCost(id) {
@@ -14,21 +24,23 @@ export default class Trips {
     return total + travelAgent;
   }
 
-  calculateTotalCost() {
-    this.totalCost = this.trips.reduce((sum, trip) => {
-      sum += this.calculateTripCost(trip.id);
+  calculateTotalCostThisYear() {
+    return this.trips.reduce((sum, trip) => {
+      if (dayjs('2021/01/01').isSameOrBefore(trip.date)) {
+        sum += this.calculateTripCost(trip.id);
+      }
       return sum;
     }, 0)
   }
 
-  categorizeTrips() {
-    const sortedTrip = this.trips.sort((a, b) => {
+  categorizeTrips(tripData) {
+    this.formatDates(tripData);
+    const sortedTrip = tripData.sort((a, b) => {
       const num1 = parseInt(a.date.replaceAll('/', ''));
       const num2 = parseInt(b.date.replaceAll('/', ''));
-      // pending instructor response, solve for the 3 dates with yyyy/m/dd...
       return num1 - num2;
     })
-    this.trips = sortedTrip.reduce((obj, trip) => {
+    return sortedTrip.reduce((obj, trip) => {
       if (trip.status !== 'approved') {
         obj.pending.push(trip);
       } else if (dayjs().isAfter(trip.date)) {
