@@ -11,7 +11,14 @@
   <header>
     <div class="header-top-section">
       <h1>Trippin</h1>
-      <button class="user-info"><img src="./images/user.svg" alt="user icon"></button>
+      <div class="user-info-dropdown">
+        <button class="dropdown-button"><img src="./images/user.svg" alt="user icon"></button>
+        <div class="dropdown-content">
+          <p>Name: </p>
+          <p>Traveler Type: </p>
+          <p>Total 2021 Spend: </p>
+        </div>
+      </div>
     </div>
     <form class="add-trip">
       <div class="add-trip-input-fields">
@@ -41,7 +48,12 @@
         </select>
       </div>
       <section class="current-trip">
-        <h3>Currently...</h3>
+        <p>Currently...</p>
+        <section class="current-destination">
+          <p>You're not currently traveling. Time to book something!</p>
+          <!-- <h3>Amsterdam, Netherlands</h3>
+          <p>mm/dd/yyyy, x days</p> -->
+        </section>
       </section>
     </div>
     <section class="trips">

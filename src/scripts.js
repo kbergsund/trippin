@@ -5,9 +5,7 @@
 import './css/base.scss';
 import './images/mountains-tanyadzu.png';
 import './images/user.svg';
-// import './images/sydney.png';
-// import './images/jaipur.png';
-// import './images/newyork.png';
+
 
 
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
