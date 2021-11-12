@@ -2,21 +2,23 @@
 @import 'reset';
 @import '_variables';
 
+* {
+  box-sizing: border-box;
+}
+
 html {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 22px;
-  border: 1px solid orange;
-  height: 100vh;
+  color: #2B2843;
 }
 
 body {
-  border: 2px solid blue;
-  // height: 100%;
+  height: 100vh;
   background-color: #F5FAF8;
-  padding: 1.1em;
+  padding: 1.5em;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
 div {
@@ -25,7 +27,15 @@ div {
 
 h1 {
   border: 1px solid purple;
-  display: inline;
+  // display: inline;
+  font-size: 1.2em;
+  color: #21BF85;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 1.2em;
+  font-weight: 700;
 }
 
 p {
@@ -36,14 +46,29 @@ p {
 header,
 main {
   border-radius: 50px;
-  padding: 1em;
+  padding: 1.2em;
+}
+
+header,
+main,
+.add-trip-input-fields,
+.my-trips-dropdown,
+.current-trip,
+input,
+select,
+.trips section {
+  box-shadow: 0px 5px 20px -5px rgba(33,191,133, 0.25);
 }
 
 header {
-  // background-image: url('../images/mountains-tanyadzu.png');
-  // background-size: cover;
-  background-color: #fff;
-  height: 7em;
+  background-image: url('../images/mountains-tanyadzu.png');
+  background-size: cover;
+  background-color: rgba(255, 255, 255, .3);
+  background-blend-mode: color;
+  background-position: center;
+  // background-position: -25px -30px;
+  height: 10em;
+  max-height: fit-content;
   border: 1px solid green;
   display: flex;
   flex-direction: column;
@@ -59,6 +84,8 @@ header {
     padding: 0 .5em;
     height: 100%;
     width: 80%;
+    flex-wrap: wrap;
+    background-color: #D5F2E8;
   }
 
   .destinations {
@@ -67,29 +94,63 @@ header {
 }
 
 form {
-  height: 2.5em;
+  min-height: 3.25em;
   border: 1px solid orange;
   display: flex;
+  // flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+
+  button {
+    background-color: #F27244;
+    color: #fff;
+    font-size: .8em;
+    font-weight: 700;
+    height: 2em;
+    padding: .5em 1em;
+  }
 }
 
 select,
 input {
-  height: fit-content;
+  height: 2.75em;
 }
 
 select,
-input[type=number] {
-  padding: .2em;
-  border: 1px solid green;
+input {
+  padding: .2em 1em;
+}
+
+input,
+select,
+button {
+  border: 0;
+}
+
+input[type=date] {
+  font-family: inherit;
+  font-size: .5em;
+  width: 12em;
+}
+
+.trip-categories {
+  background-color: #D5F2E8;
+}
+
+.add-trip-input-fields,
+input,
+button,
+select,
+.trips section,
+.current-trip {
+  border-radius: 15px;
 }
 
 main {
   background-color: #fff;
   border: 1px solid red;
   margin-top: 1em;
-  height: 20em;
+  height: 22em;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -110,19 +171,23 @@ main {
 .my-trips-dropdown {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  width: 15%;
+  justify-content: space-between;
+  min-width: 15%;
+  // padding: .3em;
 }
 
 .trips {
-  padding: 1.5em;
-  height: 13em;
+  padding: 1em;
+  height: auto;
   /* to account for glide arrow...?*/
-  padding-right: 7em;
+  padding-right: 5em;
 
   section {
-    width: 25%;
+    height: 12em;
+    min-width: 20%;
+    width: 28%;
     display: flex;
+    flex-wrap: wrap;
     align-items: flex-end;
     justify-content: flex-end;
   }
@@ -137,6 +202,8 @@ main {
 }
 
 .current-trip {
-  height: 3em;
+  background-color: #D5F2E8;
+  height: 4em;
   width: 35%;
+  padding: .5em;
 }
