@@ -1,6 +1,142 @@
 /* This is an example of how to import a partial scss file*/
+@import 'reset';
 @import '_variables';
 
+html {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 22px;
+  border: 1px solid orange;
+  height: 100vh;
+}
+
 body {
-  background: $primary-background;
+  border: 2px solid blue;
+  // height: 100%;
+  background-color: #F5FAF8;
+  padding: 1.1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+div {
+  border: 1px solid purple;
+}
+
+h1 {
+  border: 1px solid purple;
+  display: inline;
+}
+
+p {
+  font-size: 0.5em;
+  border: 1px solid blue;
+}
+
+header,
+main {
+  border-radius: 50px;
+  padding: 1em;
+}
+
+header {
+  // background-image: url('../images/mountains-tanyadzu.png');
+  // background-size: cover;
+  background-color: #fff;
+  height: 7em;
+  border: 1px solid green;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .add-trip-input-fields {
+    padding: 0 .5em;
+    height: 100%;
+    width: 80%;
+  }
+
+  .destinations {
+    width: 30%;
+  }
+}
+
+form {
+  height: 2.5em;
+  border: 1px solid orange;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+select,
+input {
+  height: fit-content;
+}
+
+select,
+input[type=number] {
+  padding: .2em;
+  border: 1px solid green;
+}
+
+main {
+  background-color: #fff;
+  border: 1px solid red;
+  margin-top: 1em;
+  height: 20em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  section {
+    border: 1px solid red;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .main-top-section {
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.my-trips-dropdown {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 15%;
+}
+
+.trips {
+  padding: 1.5em;
+  height: 13em;
+  /* to account for glide arrow...?*/
+  padding-right: 7em;
+
+  section {
+    width: 25%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+  }
+
+  div {
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    margin: 1em;
+    height: 3em;
+  }
+}
+
+.current-trip {
+  height: 3em;
+  width: 35%;
 }
