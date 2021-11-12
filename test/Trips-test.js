@@ -24,8 +24,8 @@ describe('Trips', function() {
   });
 
   it('should standardize date formatting', function() {
-    trips.formatDates();
-    assert.equal(trips.trips[2].date, '2020/03/28');
+    trips.formatDates(trips.trips);
+    assert.equal(trips.trips[1].date, '2020/03/28');
   })
 
   it('should calculate the cost of a single trip given a trip id', function() {
@@ -38,7 +38,7 @@ describe('Trips', function() {
   });
 
   it('should sort by date & into categories: pending, past, present, upcoming', function() {
-    user3Trips.categorizeTrips();
-    assert.deepEqual(user3Trips.trips, categorizedTravelersTrips);
+    user3Trips.categorizeTrips(travelerSpecificTrips);
+    assert.deepEqual(user3Trips.categorizedTrips, categorizedTravelersTrips);
   });
 })

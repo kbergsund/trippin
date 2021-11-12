@@ -6,11 +6,11 @@ export default class Trips {
   constructor(tripData) {
     this.trips = tripData;
     this.totalCost = this.calculateTotalCostThisYear(tripData);
-    // this.categorizedTrips = this.categorizeTrips(this.trips);
+    this.categorizedTrips = this.categorizeTrips(tripData);
   }
 
-  formatDates() {
-    this.trips.forEach(trip => {
+  formatDates(tripData) {
+    tripData.forEach(trip => {
       trip.date = dayjs(trip.date).format('YYYY/MM/DD');
     })
   }
@@ -33,14 +33,14 @@ export default class Trips {
     }, 0)
   }
 
-  categorizeTrips() {
-    this.formatDates();
-    const sortedTrip = this.trips.sort((a, b) => {
+  categorizeTrips(tripData) {
+    this.formatDates(tripData);
+    const sortedTrip = tripData.sort((a, b) => {
       const num1 = parseInt(a.date.replaceAll('/', ''));
       const num2 = parseInt(b.date.replaceAll('/', ''));
       return num1 - num2;
     })
-    this.trips = sortedTrip.reduce((obj, trip) => {
+    return sortedTrip.reduce((obj, trip) => {
       if (trip.status !== 'approved') {
         obj.pending.push(trip);
       } else if (dayjs().isAfter(trip.date)) {
