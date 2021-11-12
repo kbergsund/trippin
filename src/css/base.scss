@@ -8,12 +8,13 @@
 
 html {
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 22px;
+  font-size: 24px;
   color: #2B2843;
 }
 
 body {
   height: 100vh;
+  min-height: fit-content;
   background-color: #F5FAF8;
   padding: 1.5em;
   display: flex;
@@ -21,13 +22,12 @@ body {
   justify-content: space-between;
 }
 
-div {
-  border: 1px solid purple;
-}
+// div {
+//   border: 1px solid purple;
+// }
 
 h1 {
-  border: 1px solid purple;
-  // display: inline;
+  // border: 1px solid purple;
   font-size: 1.2em;
   color: #21BF85;
   font-weight: 700;
@@ -36,6 +36,11 @@ h1 {
 h2 {
   font-size: 1.2em;
   font-weight: 700;
+  margin-top: .2em;
+}
+
+h3 {
+  font-size: .8em;
 }
 
 p {
@@ -43,16 +48,22 @@ p {
   border: 1px solid blue;
 }
 
+button:hover,
+input:hover,
+select:hover {
+  cursor: pointer;
+}
+
 header,
 main {
   border-radius: 50px;
-  padding: 1.2em;
+  padding: 1em;
 }
 
 header,
 main,
 .add-trip-input-fields,
-.my-trips-dropdown,
+.trip-categories,
 .current-trip,
 input,
 select,
@@ -63,13 +74,10 @@ select,
 header {
   background-image: url('../images/mountains-tanyadzu.png');
   background-size: cover;
-  background-color: rgba(255, 255, 255, .3);
+  background-color: rgba(255, 255, 255, .25);
   background-blend-mode: color;
   background-position: center;
-  // background-position: -25px -30px;
-  height: 10em;
-  max-height: fit-content;
-  border: 1px solid green;
+  height: 13em;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -82,8 +90,8 @@ header {
 
   .add-trip-input-fields {
     padding: 0 .5em;
-    height: 100%;
-    width: 80%;
+    height: 80%;
+    width: 75%;
     flex-wrap: wrap;
     background-color: #D5F2E8;
   }
@@ -95,9 +103,7 @@ header {
 
 form {
   min-height: 3.25em;
-  border: 1px solid orange;
   display: flex;
-  // flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
 
@@ -148,15 +154,13 @@ select,
 
 main {
   background-color: #fff;
-  border: 1px solid red;
   margin-top: 1em;
-  height: 22em;
+  height: auto;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 
   section {
-    border: 1px solid red;
     display: flex;
     justify-content: space-between;
   }
@@ -165,6 +169,7 @@ main {
     height: auto;
     display: flex;
     justify-content: space-between;
+    padding-left: .7em;
   }
 }
 
@@ -181,10 +186,11 @@ main {
   height: auto;
   /* to account for glide arrow...?*/
   padding-right: 5em;
+  flex-wrap: wrap;
 
   section {
     height: 12em;
-    min-width: 20%;
+    min-width: fit-content;
     width: 28%;
     display: flex;
     flex-wrap: wrap;
@@ -195,9 +201,19 @@ main {
   div {
     display: flex;
     flex-direction: column;
-    height: fit-content;
-    margin: 1em;
-    height: 3em;
+    min-height: fit-content;
+    margin: 0 1em 1em 0;
+    justify-content: space-around;
+    height: 3.25em;
+  }
+
+  .trip-info {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: .5em;
+    min-height: fit-content;
+    width: 70%;
+    text-align: right;
   }
 }
 
@@ -206,4 +222,26 @@ main {
   height: 4em;
   width: 35%;
   padding: .5em;
+}
+
+/* hard-coded for now */
+#sydney,
+#jaipur,
+#newyork {
+  background-size: cover;
+  background-position: center;
+  filter: grayscale(100%);
+  color: #000;
+}
+
+#sydney {
+  background-image: url('../images/sydney.png');
+}
+
+#jaipur {
+  background-image: url('../images/jaipur.png');
+}
+
+#newyork {
+  background-image: url('../images/newyork.png');
 }
