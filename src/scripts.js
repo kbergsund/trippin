@@ -10,8 +10,8 @@ const retrieveData = () => {
   ).then(data => {
     buildTravelerRepo(
       Object.values(data[0])[0], 
-      Object.values(data[1]), 
-      Object.values(data[2]));
+      Object.values(data[1]).flat(), 
+      Object.values(data[2]).flat());
   })
 }
 

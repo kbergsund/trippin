@@ -3,8 +3,8 @@ import Traveler from './Traveler';
 export default class TravelerRepo {
   constructor(travelerData, tripData, destinationData) {
     this.allTravelers = travelerData;
-    this.allTrips = tripData.flat();
-    this.allDestinations = destinationData.flat();
+    this.allTrips = tripData;
+    this.allDestinations = destinationData;
   }
 
   updateTrips() {
