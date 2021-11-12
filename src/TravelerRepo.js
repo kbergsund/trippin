@@ -30,5 +30,9 @@ export default class TravelerRepo {
     })
   }
 
+  retrieveTraveler(id) {
+    this.currentTraveler = this.allTravelers
+      .find(traveler => traveler.id === id);
+  }
   //addTrip method?
 }
