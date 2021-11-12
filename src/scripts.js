@@ -1,15 +1,26 @@
-// This is the JavaScript entry file - your code begins here
-// Do not delete or rename this file ********
-
 // An example of how you tell webpack to use a CSS (SCSS) file
 import './css/base.scss';
 import './images/mountains-tanyadzu.png';
 import './images/user.svg';
+import { fetchData } from './fetch';
+import TravelerRepo from './TravelerRepo'
 
+const retrieveData = () => {
+  Promise.all(
+    [fetchData('travelers'), fetchData('trips'), fetchData('destinations')]
+  ).then(data => {
+    buildTravelerRepo(
+      Object.values(data[0])[0], 
+      Object.values(data[1]), 
+      Object.values(data[2]));
+  })
+}
 
+const buildTravelerRepo = (travelerData, tripData, destinationData) => {
+  const travelerRepo = 
+    new TravelerRepo(travelerData, tripData, destinationData);
+  travelerRepo.buildTravelers();
+  console.log(travelerRepo);
+}
 
-// An example of how you tell webpack to use an image (also need to link to it in the index.html)
-// import './images/turing-logo.png'
-
-
-console.log('This is the JavaScript entry file - your code begins here.');
+retrieveData();
