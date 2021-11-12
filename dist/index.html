@@ -4,13 +4,79 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Travel Tracker</title>
+  <title>Trippin</title>
 </head>
 <body>
-  <img src="./images/turing-logo.png" alt="turing logo">
-  
-  <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
-  <script src="bundle.js"></script>
 
+  <header>
+    <div class="header-top-section">
+      <h1>trippin</h1>
+      <div class="user-info-dropdown">
+        <button class="dropdown-button"><img src="./images/user.svg" alt="user icon"></button>
+        <div class="dropdown-content">
+          <p>Name: </p>
+          <p>Traveler Type: </p>
+          <p>Total 2021 Spend: </p>
+        </div>
+      </div>
+    </div>
+    <form class="add-trip">
+      <div class="add-trip-input-fields">
+        <select class="destinations" required>
+          <option>Destinations</option>
+          <option>Sydney, Australia</option>
+          <option>Jaipur, India</option>
+          <option>New York, New York</option>
+        </select>
+        <input type="date" required>
+        <input type="number" placeholder="Days" required>
+        <input type="number" placeholder="People" required>
+      </div>
+      <p>Estimated cost...</p>
+      <button aria-label="submit-trip-request">Request</button>
+    </form>
+  </header>
+  
+  <main>
+    <div class="main-top-section">
+      <div class="my-trips-dropdown">
+        <h2>My Trips</h2>
+        <select name="trip-categories" class="trip-categories">
+          <option value="upcoming">Upcoming</option>
+          <option value="past">Past</option>
+          <option value="pending">Pending</option>
+        </select>
+      </div>
+      <section class="current-trip">
+        <p>Currently...</p>
+        <section class="current-destination">
+          <p>You're not currently traveling. Time to book something!</p>
+          <!-- <h3>Amsterdam, Netherlands</h3>
+          <p>mm/dd/yyyy, x days</p> -->
+        </section>
+      </section>
+    </div>
+    <section class="trips">
+      <section id="sydney">
+        <div class="trip-info">
+          <h3>Sydney, Australia</h3>
+          <p>mm/dd/yyyy, x days</p>
+        </div>
+      </section>
+      <section id="jaipur">
+        <div class="trip-info">
+          <h3>Jaipur, India</h3>
+          <p>mm/dd/yyyy, x days</p>
+        </div>
+      </section>
+      <section id="newyork">
+        <div class="trip-info">
+          <h3>New York, New York</h3>
+          <p>mm/dd/yyyy, x days</p>
+        </div>
+      </section>
+    </section>
+  </main>
+  <script src="bundle.js"></script>
 </body>
 </html>
