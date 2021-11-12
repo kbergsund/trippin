@@ -1,8 +1,11 @@
 @import 'reset';
 @import '_variables';
 
+/* ~~~~~~~~~~ GLOBAL RULES ~~~~~~~~~~ */
+
 * {
   box-sizing: border-box;
+  border: 0;
 }
 
 html {
@@ -12,30 +15,25 @@ html {
 }
 
 body {
-  height: 100vh;
-  min-height: fit-content;
   background-color: #F5FAF8;
-  padding: 1.5em;
   display: flex;
   flex-direction: column;
+  height: 100vh;
   justify-content: space-between;
+  min-height: fit-content;
+  padding: 1.5em;
 }
 
-// div {
-//   border: 1px solid purple;
-// }
-
 h1 {
-  // border: 1px solid purple;
-  font-size: 1.2em;
+  font-size: 1.4em;
   color: #21BF85;
   font-weight: 700;
 }
 
 h2 {
-  font-size: 1.2em;
+  font-size: 1.1em;
   font-weight: 700;
-  margin-top: .2em;
+  margin-top: .4em;
 }
 
 h3 {
@@ -43,13 +41,7 @@ h3 {
 }
 
 p {
-  font-size: 0.5em;
-}
-
-button:hover,
-input:hover,
-select:hover {
-  cursor: pointer;
+  font-size: .65em;
 }
 
 header,
@@ -58,28 +50,51 @@ main {
   padding: 1em;
 }
 
-header,
-main,
-.add-trip-input-fields,
-.trip-categories,
-.current-trip,
 input,
 select {
-  box-shadow: 0px 5px 20px -5px rgba(33,191,133, 0.25);
-}
-.trips section {
-  box-shadow: 0px 6px 20px -3px rgba(33,191,133, .7);
+  height: 2.75em;
+  padding: .2em 1em;
 }
 
+input[type=date] {
+  font-family: inherit;
+}
+
+header,
+main,
+input,
+select
+.add-trip-input-fields,
+.trip-categories,
+.current-trip {
+  box-shadow: 0px 5px 20px -5px rgba(33,191,133, 0.25);
+}
+
+input,
+button,
+select,
+.add-trip-input-fields,
+.trips section,
+.current-trip {
+  border-radius: 15px;
+}
+
+button:hover,
+input:hover,
+select:hover {
+  cursor: pointer;
+}
+
+/* ~~~~~~~~~~ HEADER RULES ~~~~~~~~~~ */
 header {
+  background-blend-mode: hard-light;
+  background-color: rgba(255, 255, 255, .2);
   background-image: url('../images/mountains-tanyadzu.png');
   background-size: cover;
-  background-color: rgba(255, 255, 255, .25);
-  background-blend-mode: color;
   background-position: center;
-  height: 13em;
   display: flex;
   flex-direction: column;
+  height: 13em;
   justify-content: space-between;
 
   div {
@@ -88,20 +103,36 @@ header {
     align-items: center;
   }
 
-  .add-trip-input-fields {
-    padding: 0 .5em;
-    height: 80%;
-    width: 75%;
-    flex-wrap: wrap;
-    background-color: #D5F2E8;
-  }
+  form {
+    min-height: 3.25em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  
+    .add-trip-input-fields {
+      padding: 0 .5em;
+      height: 80%;
+      width: 75%;
+      flex-wrap: wrap;
+      background-color: #D5F2E8;
+  
+      .destinations {
+        width: 30%;
+      }
+    }
 
-  .destinations {
-    width: 30%;
+    button {
+      background-color: #F27244;
+      color: #fff;
+      font-size: .8em;
+      font-weight: 700;
+      height: 2em;
+      padding: .5em 1em;
+    }
   }
 }
 
-/* NOT ACCESSIBLE- need pseudoclass for tabbing/enter*/
+/* NOT ACCESSIBLE- need pseudoclass for tabbing/enter */
 .user-info-dropdown {
   display: flex;
   justify-content: flex-end;
@@ -137,58 +168,7 @@ header {
 
 }
 
-
-form {
-  min-height: 3.25em;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  button {
-    background-color: #F27244;
-    color: #fff;
-    font-size: .8em;
-    font-weight: 700;
-    height: 2em;
-    padding: .5em 1em;
-  }
-}
-
-select,
-input {
-  height: 2.75em;
-}
-
-select,
-input {
-  padding: .2em 1em;
-}
-
-input,
-select,
-button {
-  border: 0;
-}
-
-input[type=date] {
-  font-family: inherit;
-  font-size: .5em;
-  width: 12em;
-}
-
-.trip-categories {
-  background-color: #D5F2E8;
-}
-
-.add-trip-input-fields,
-input,
-button,
-select,
-.trips section,
-.current-trip {
-  border-radius: 15px;
-}
-
+/* ~~~~~~~~~~ MAIN RULES ~~~~~~~~~~ */
 main {
   background-color: #fff;
   margin-top: 1em;
@@ -206,68 +186,71 @@ main {
     height: auto;
     display: flex;
     justify-content: space-between;
-    padding-left: .7em;
+    padding: 1em;
+
+    .my-trips-dropdown {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-width: 15%;
+      
+      .trip-categories {
+        background-color: #D5F2E8;
+      }
+    }
+
+    .current-trip {
+      background-color: #D5F2E8;
+      height: 4em;
+      width: 40%;
+      padding: 1em;
+
+      .current-destination {
+        // border: 1px solid green;
+        flex-direction: column;
+        align-items: flex-end;
+        justify-content: space-evenly;
+        text-align: right;
+      }
+    }
   }
-}
 
-.my-trips-dropdown {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  min-width: 15%;
-  // padding: .3em;
-}
-
-.current-destination {
-  border: 1px solid green;
-  flex-direction: column;
-  align-items: flex-end;
-  justify-content: space-evenly;
-  text-align: right;
-}
-
-.trips {
-  padding: 1em;
-  height: auto;
-  /* to account for glide arrow...?*/
-  padding-right: 5em;
-  flex-wrap: wrap;
-
-  section {
-    height: 12em;
-    min-width: fit-content;
-    width: 28%;
-    display: flex;
+  .trips {
+    padding: 1em;
+    height: auto;
+    /* to account for glide arrow...?*/
+    // padding-right: 5em;
     flex-wrap: wrap;
-    align-items: flex-end;
-    justify-content: flex-end;
+  
+    section {
+      height: 12em;
+      min-width: fit-content;
+      width: 28%;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      justify-content: flex-end;
+      box-shadow: 0px 6px 20px -3px rgba(33,191,133, .7);
+    }
+  
+    div {
+      display: flex;
+      flex-direction: column;
+      min-height: fit-content;
+      margin: 0 1em 1em 0;
+      justify-content: space-around;
+      height: 3.25em;
+    }
+  
+    .trip-info {
+      background-color: #fff;
+      border-radius: 10px;
+      padding: .5em;
+      min-height: fit-content;
+      width: 70%;
+      text-align: right;
+    }
   }
-
-  div {
-    display: flex;
-    flex-direction: column;
-    min-height: fit-content;
-    margin: 0 1em 1em 0;
-    justify-content: space-around;
-    height: 3.25em;
-  }
-
-  .trip-info {
-    background-color: #fff;
-    border-radius: 10px;
-    padding: .5em;
-    min-height: fit-content;
-    width: 70%;
-    text-align: right;
-  }
-}
-
-.current-trip {
-  background-color: #D5F2E8;
-  height: 4em;
-  width: 40%;
-  padding: .5em;
-  margin-right: .25em;
 }
 
 /* hard-coded for now */
