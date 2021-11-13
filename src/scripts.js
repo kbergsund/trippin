@@ -5,7 +5,7 @@ import { fetchData } from './fetch';
 import TravelerRepo from './TravelerRepo'
 const dayjs = require('dayjs');
 
-
+// Global Variable
 let travelerRepo;
 
 const retrieveData = () => {
@@ -32,19 +32,53 @@ const getRandomIndex = (array) => {
   return Math.floor(Math.random() * array.length + 1);
 };
 
+// Query Selectors
 const userDropdown = document.querySelector('#dropdownContent');
 const currentTrip = document.querySelector('#currentTrip');
 const tripCategories = document.querySelector('#tripCategories')
 const upcoming = document.querySelector('#upcoming');
 const past = document.querySelector('#past');
 const pending = document.querySelector('#pending');
+const addTripForm = document.querySelector('#add-trip-form');
 
+// Event Listeners
 tripCategories.addEventListener('change', toggleTripView);
+addTripForm.addEventListener('change', checkFormValues);
+addTripForm.addEventListener('submit', (event) => {
+  addTrip(event);
+});
 
+// Event Handlers
+function checkFormValues() {
+  const elementIndexes = Object.keys(addTripForm.elements);
+  elementIndexes.splice(4, 2);
+  const formValues = elementIndexes.reduce((acc, number)=> {
+    acc.push(addTripForm.elements[number].value);
+    return acc;
+  }, [])
+  if (travelerRepo.estimateTripCost(formValues)) {
+    addTripForm.childNodes[3].innerText = `Estimated Total Cost: ~$${travelerRepo.estimateTripCost(formValues)}`
+  }
+}
+
+function addTrip(e) {
+  e.preventDefault();
+  addTripForm.reset();
+  console.log('submitted')
+  // tripDetails = {
+  //   destination: tripDetails[0],
+  //   date: dayjs(tripDetails[1]).format('YYYY/MM/DD'),
+  //   duration: tripDetails[2],
+  //   travelers: tripDetails[3]
+  // }
+  // console.log(tripDetails);
+}
+
+// Functions
 const generateDOM = () => {
   const randomID = getRandomIndex(travelerRepo.allTravelers);
-  travelerRepo.retrieveTraveler(randomID);
-  const traveler = travelerRepo.currentTraveler;
+  travelerRepo.retrieveTraveler(3);
+  const traveler = travelerRepo.currentTraveler
   console.log(travelerRepo.currentTraveler);
   displayUserInfo(traveler);
   displayCurrentTrip(traveler);
@@ -71,8 +105,9 @@ const displayCurrentTrip = (traveler) => {
     `
   } 
 }
+
 const generateTrips = (traveler) => {
-  console.log(traveler.myTrips.categorizedTrips);
+  // console.log(traveler.myTrips.categorizedTrips);
   const myTripCategories = Object.keys(traveler.myTrips.categorizedTrips);
   // refactor method/test so that present is first? Annoyed by this splice.
   myTripCategories.splice(2, 1);

@@ -1,4 +1,5 @@
 import Traveler from './Traveler';
+const dayjs = require('dayjs');
 
 export default class TravelerRepo {
   constructor(travelerData, tripData, destinationData) {
@@ -34,5 +35,20 @@ export default class TravelerRepo {
     this.currentTraveler = this.allTravelers
       .find(traveler => traveler.id === id);
   }
+
+  estimateTripCost(tripDetails) {
+    if (tripDetails.every(value => value.length !== 0)) {
+      const requestedDestination = this.allDestinations
+        .find(destination => destination.destination === tripDetails[0])
+      const flights = tripDetails[3] * 
+        requestedDestination.estimatedFlightCostPerPerson;
+      const lodging = tripDetails[2] * 
+        requestedDestination.estimatedLodgingCostPerDay;
+      const total = flights + lodging;
+      const travelAgent = total * 0.1
+      return total + travelAgent;
+    }
+  }
+  
   //addTrip method?
 }
