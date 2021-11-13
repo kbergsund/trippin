@@ -18,7 +18,6 @@ const retrieveData = () => {
       Object.values(data[2]).flat());
     generateDOM();
   })
-  // .then(() => generateDOM())
 }
 
 const buildTravelerRepo = (travelerData, tripData, destinationData) => {
@@ -45,7 +44,7 @@ tripCategories.addEventListener('change', toggleTripView);
 const generateDOM = () => {
   const randomID = getRandomIndex(travelerRepo.allTravelers);
   travelerRepo.retrieveTraveler(randomID);
-  const traveler = travelerRepo.currentTraveler
+  const traveler = travelerRepo.currentTraveler;
   console.log(travelerRepo.currentTraveler);
   displayUserInfo(traveler);
   displayCurrentTrip(traveler);
@@ -85,17 +84,30 @@ const generateTrips = (traveler) => {
     } else {
       traveler.myTrips.categorizedTrips[category].forEach(trip => {
         window[category].innerHTML += `
-        <section>
+        <section id="${trip.id}">
           <div class="trip-info">
             <h3>${trip.destination}</h3>
             <p>${dayjs(trip.date).format('M/D/YYYY')}, ${trip.duration} days<p>
           </div>
         </section>
         `
+        addBackgroundImage(trip.id, trip.image)
       })
     }
   })
 }
+
+const addBackgroundImage = (id, img) => {
+  const styles = {
+    'background-image': `url(${img}`,
+    'background-size': 'cover',
+    'background-position': 'center',
+    'filter': 'grayscale(100%)',
+    'color': '#000'
+  }
+  var tripSection = document.getElementById(`${id}`);
+  Object.assign(tripSection.style, styles);
+} 
 
 function toggleTripView() {
   switch (tripCategories.value) {
