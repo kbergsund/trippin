@@ -67,6 +67,7 @@ function checkFormValues() {
 function addTrip(e) {
   e.preventDefault();
   addTripForm.reset();
+  addTripForm.childNodes[3].innerText = ``
   console.log('submitted');
   // tripDetails = {
   //   destination: tripDetails[0],
