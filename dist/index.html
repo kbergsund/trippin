@@ -19,20 +19,20 @@
         </div>
       </div>
     </div>
-    <form class="add-trip">
+    <form class="add-trip" id="add-trip-form">
       <div class="add-trip-input-fields">
         <select class="destinations" required>
-          <option>Destinations</option>
+          <option hidden>Destinations</option>
           <option>Sydney, Australia</option>
           <option>Jaipur, India</option>
           <option>New York, New York</option>
         </select>
-        <input type="date" required>
+        <input type="date" id="calendar" required>
         <input type="number" placeholder="Days" required>
         <input type="number" placeholder="People" required>
       </div>
-      <p>Estimated cost...</p>
-      <button aria-label="submit-trip-request">Request</button>
+      <p></p>
+      <button type="submit" id="submitButton" aria-label="submit-trip-request-button">Request</button>
     </form>
   </header>
   <main>
