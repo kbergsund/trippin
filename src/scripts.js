@@ -40,6 +40,7 @@ const upcoming = document.querySelector('#upcoming');
 const past = document.querySelector('#past');
 const pending = document.querySelector('#pending');
 const addTripForm = document.querySelector('#add-trip-form');
+const formCalendar = document.querySelector('#calendar');
 
 // Event Listeners
 tripCategories.addEventListener('change', toggleTripView);
@@ -57,7 +58,8 @@ function checkFormValues() {
     return acc;
   }, [])
   if (travelerRepo.estimateTripCost(formValues)) {
-    addTripForm.childNodes[3].innerText = `Estimated Total Cost: ~$${travelerRepo.estimateTripCost(formValues)}`
+    addTripForm.childNodes[3].innerText = 
+      `Estimated Total Cost: ~$${travelerRepo.estimateTripCost(formValues)}`
   }
 }
 
@@ -80,6 +82,7 @@ const generateDOM = () => {
   travelerRepo.retrieveTraveler(3);
   const traveler = travelerRepo.currentTraveler
   console.log(travelerRepo.currentTraveler);
+  restrictCalendarMinDate();
   displayUserInfo(traveler);
   displayCurrentTrip(traveler);
   generateTrips(traveler);
@@ -140,9 +143,13 @@ const addBackgroundImage = (id, img) => {
     'filter': 'grayscale(100%)',
     'color': '#000'
   }
-  var tripSection = document.getElementById(`${id}`);
+  const tripSection = document.getElementById(`${id}`);
   Object.assign(tripSection.style, styles);
 } 
+
+const restrictCalendarMinDate = () => {
+  formCalendar.min = new Date().toISOString().substr(0, 10);
+}
 
 function toggleTripView() {
   switch (tripCategories.value) {
