@@ -44,7 +44,7 @@ const formCalendar = document.querySelector('#calendar');
 
 // Event Listeners
 tripCategories.addEventListener('change', toggleTripView);
-addTripForm.addEventListener('change', checkFormValues);
+addTripForm.addEventListener('keyup', checkFormValues);
 addTripForm.addEventListener('submit', (event) => {
   addTrip(event);
 });
@@ -52,11 +52,12 @@ addTripForm.addEventListener('submit', (event) => {
 // Event Handlers
 function checkFormValues() {
   const elementIndexes = Object.keys(addTripForm.elements);
-  elementIndexes.splice(4, 2);
+  elementIndexes.splice(4, 3);
   const formValues = elementIndexes.reduce((acc, number)=> {
     acc.push(addTripForm.elements[number].value);
     return acc;
   }, [])
+  console.log(formValues);
   if (travelerRepo.estimateTripCost(formValues)) {
     addTripForm.childNodes[3].innerText = 
       `Estimated Total Cost: ~$${travelerRepo.estimateTripCost(formValues)}`
@@ -66,7 +67,7 @@ function checkFormValues() {
 function addTrip(e) {
   e.preventDefault();
   addTripForm.reset();
-  console.log('submitted')
+  console.log('submitted');
   // tripDetails = {
   //   destination: tripDetails[0],
   //   date: dayjs(tripDetails[1]).format('YYYY/MM/DD'),
@@ -74,6 +75,9 @@ function addTrip(e) {
   //   travelers: tripDetails[3]
   // }
   // console.log(tripDetails);
+  // map tripDetails to correct trip format for posting.
+  // call postData method with tripDetails argument
+  // where will we update and then add it to travelers' pending trips?
 }
 
 // Functions
