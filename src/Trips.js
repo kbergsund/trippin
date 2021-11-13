@@ -5,7 +5,7 @@ dayjs.extend(isSameOrBefore);
 export default class Trips {
   constructor(tripData) {
     this.trips = tripData;
-    this.totalCost = this.calculateTotalCostThisYear(tripData);
+    this.totalCost = this.calculateTotalCostThisYear();
     this.categorizedTrips = this.categorizeTrips(tripData);
   }
 

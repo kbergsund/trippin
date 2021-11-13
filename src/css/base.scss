@@ -252,25 +252,3 @@ main {
     }
   }
 }
-
-/* hard-coded for now */
-#sydney,
-#jaipur,
-#newyork {
-  background-size: cover;
-  background-position: center;
-  filter: grayscale(100%);
-  color: #000;
-}
-
-#sydney {
-  background-image: url('../images/sydney.png');
-}
-
-#jaipur {
-  background-image: url('../images/jaipur.png');
-}
-
-#newyork {
-  background-image: url('../images/newyork.png');
-}
