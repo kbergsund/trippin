@@ -3,6 +3,8 @@ import './images/mountains-tanyadzu.png';
 import './images/user.svg';
 import { fetchData } from './fetch';
 import TravelerRepo from './TravelerRepo'
+const dayjs = require('dayjs');
+
 
 let travelerRepo;
 
@@ -14,9 +16,9 @@ const retrieveData = () => {
       Object.values(data[0])[0], 
       Object.values(data[1]).flat(), 
       Object.values(data[2]).flat());
-    renderDOM();
+    generateDOM();
   })
-  // .then(() => renderDOM())
+  // .then(() => generateDOM())
 }
 
 const buildTravelerRepo = (travelerData, tripData, destinationData) => {
@@ -24,6 +26,8 @@ const buildTravelerRepo = (travelerData, tripData, destinationData) => {
     new TravelerRepo(travelerData, tripData, destinationData);
   travelerRepo.buildTravelers();
 }
+
+// DOM MANIPULATION
 
 const getRandomIndex = (array) => {
   return Math.floor(Math.random() * array.length + 1);
@@ -38,14 +42,14 @@ const pending = document.querySelector('#pending');
 
 tripCategories.addEventListener('change', toggleTripView);
 
-const renderDOM = () => {
+const generateDOM = () => {
   const randomID = getRandomIndex(travelerRepo.allTravelers);
-  travelerRepo.retrieveTraveler(28);
+  travelerRepo.retrieveTraveler(randomID);
   const traveler = travelerRepo.currentTraveler
   console.log(travelerRepo.currentTraveler);
   displayUserInfo(traveler);
   displayCurrentTrip(traveler);
-  displayTrips(traveler);
+  generateTrips(traveler);
   toggleTripView();
 }
 
@@ -57,23 +61,43 @@ const displayUserInfo = (traveler) => {
   `
 }
 
-// Not Tested!
 const displayCurrentTrip = (traveler) => {
-  console.log(traveler.myTrips.categorizedTrips.present);
+  // Not Tested!
   if (traveler.myTrips.categorizedTrips.present.length > 0) {
-    const currentDestination = traveler.myTrips.categorizedTrips.present[0].destinationID
+    const currentDestination = traveler.myTrips.categorizedTrips.present[0]
     currentTrip.childNodes[3].innerHTML = `
-    <h3>${currentDestination}<h3>
+    <h3>${currentDestination.destinationID}<h3>
+    <p>${dayjs(currentDestination.date)
+    .format('M/D/YYYY')}, ${currentDestination.duration} days<p>
     `
-    // <p> element for start date & duration?
   } 
 }
-const displayTrips = (traveler) => {
-
+const generateTrips = (traveler) => {
+  console.log(traveler.myTrips.categorizedTrips);
+  const myTripCategories = Object.keys(traveler.myTrips.categorizedTrips);
+  // refactor method/test so that present is first? Annoyed by this splice.
+  myTripCategories.splice(2, 1);
+  myTripCategories.forEach(category => {
+    if (!traveler.myTrips.categorizedTrips[category].length) {
+      window[category].innerHTML = `
+       <p>You don't have any ${category} trips!</p>
+       `
+    } else {
+      traveler.myTrips.categorizedTrips[category].forEach(trip => {
+        window[category].innerHTML += `
+        <section>
+          <div class="trip-info">
+            <h3>${trip.destination}</h3>
+            <p>${dayjs(trip.date).format('M/D/YYYY')}, ${trip.duration} days<p>
+          </div>
+        </section>
+        `
+      })
+    }
+  })
 }
 
-function toggleTripView(traveler) {
-  console.log(tripCategories.value)
+function toggleTripView() {
   switch (tripCategories.value) {
   case 'upcoming':
     upcoming.style.display = 'block';
