@@ -40,6 +40,7 @@ const upcoming = document.querySelector('#upcoming');
 const past = document.querySelector('#past');
 const pending = document.querySelector('#pending');
 const addTripForm = document.querySelector('#add-trip-form');
+const formDestinations = document.querySelector('#destinations');
 const formCalendar = document.querySelector('#calendar');
 
 // Event Listeners
@@ -88,6 +89,7 @@ const generateDOM = () => {
   const traveler = travelerRepo.currentTraveler
   console.log(travelerRepo.currentTraveler);
   restrictCalendarMinDate();
+  generateFormDestinations();
   displayUserInfo(traveler);
   displayCurrentTrip(traveler);
   generateTrips(traveler);
@@ -154,6 +156,14 @@ const addBackgroundImage = (id, img) => {
 
 const restrictCalendarMinDate = () => {
   formCalendar.min = new Date().toISOString().substr(0, 10);
+}
+
+const generateFormDestinations = () => {
+  travelerRepo.allDestinations.forEach(destination => {
+    formDestinations.innerHTML += `
+    <option>${destination.destination}</option>
+    `
+  })
 }
 
 function toggleTripView() {
