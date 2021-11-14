@@ -1,7 +1,7 @@
 import './css/base.scss';
 import './images/mountains-tanyadzu.png';
 import './images/user.svg';
-import { fetchData } from './fetch';
+import { fetchData, postData } from './fetch';
 import TravelerRepo from './TravelerRepo'
 const dayjs = require('dayjs');
 
@@ -80,21 +80,11 @@ function checkFormValues() {
 
 function addTrip(e) {
   e.preventDefault();
-  travelerRepo.addTrip(formatFormValues())
+  const trip = travelerRepo.prepareTripDetails(formatFormValues())
+  postData(trip);
   addTripForm.reset();
-  // const formValues = formatFormValues();
+  // ADD SUCCESS MESSAGING
   addTripForm.childNodes[3].innerText = ``
-  console.log('submitted');
-  // tripDetails = {
-  //   destination: tripDetails[0],
-  //   date: dayjs(tripDetails[1]).format('YYYY/MM/DD'),
-  //   duration: tripDetails[2],
-  //   travelers: tripDetails[3]
-  // }
-  // console.log(tripDetails);
-  // map tripDetails to correct trip format for posting.
-  // call postData method with tripDetails argument
-  // where will we update and then add it to travelers' pending trips?
 }
 
 // Functions
@@ -107,7 +97,7 @@ const generateDOM = () => {
   generateFormDestinations();
   displayUserInfo(traveler);
   displayCurrentTrip(traveler);
-  generateTrips(traveler);
+  generateTripCards(traveler);
   toggleTripView();
 }
 
@@ -122,19 +112,19 @@ const displayUserInfo = (traveler) => {
 const displayCurrentTrip = (traveler) => {
   // Not Tested!
   if (traveler.myTrips.categorizedTrips.present.length > 0) {
-    const currentDestination = traveler.myTrips.categorizedTrips.present[0]
+    const currentDestination = traveler.myTrips.categorizedTrips.present[0];
     currentTrip.childNodes[3].innerHTML = `
     <h3>${currentDestination.destinationID}<h3>
     <p>${dayjs(currentDestination.date)
     .format('M/D/YYYY')}, ${currentDestination.duration} days<p>
     `
-  } 
+  } else {
+    currentTrip.childNodes[3].innerHTML = '<p>You\'re not currently traveling. Time to book a trip!<p>'
+  }
 }
 
-const generateTrips = (traveler) => {
-  // console.log(traveler.myTrips.categorizedTrips);
+const generateTripCards = (traveler) => {
   const myTripCategories = Object.keys(traveler.myTrips.categorizedTrips);
-  // refactor method/test so that present is first? Annoyed by this splice.
   myTripCategories.splice(2, 1);
   myTripCategories.forEach(category => {
     if (!traveler.myTrips.categorizedTrips[category].length) {
@@ -142,12 +132,14 @@ const generateTrips = (traveler) => {
        <p>You don't have any ${category} trips!</p>
        `
     } else {
+      window[category].innerHTML = '';
       traveler.myTrips.categorizedTrips[category].forEach(trip => {
         window[category].innerHTML += `
         <section id="${trip.id}">
           <div class="trip-info">
             <h3>${trip.destination}</h3>
             <p>${dayjs(trip.date).format('M/D/YYYY')}, ${trip.duration} days<p>
+            <p>${trip.travelers} travelers</p>
           </div>
         </section>
         `
@@ -202,3 +194,7 @@ function toggleTripView() {
 }
 
 retrieveData();
+
+export {
+  retrieveData
+}

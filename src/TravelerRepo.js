@@ -12,13 +12,11 @@ export default class TravelerRepo {
     this.allTrips.map(trip => {
       const destination = this.allDestinations
         .find(destination => destination.id === trip.destinationID)
-      console.log(destination);
       Object.keys(destination).forEach(property => {
         if (property !== 'id') {
           trip[property] = destination[property];
         }
       })
-      console.log(destination);
     })
   }
 
@@ -65,8 +63,7 @@ export default class TravelerRepo {
     }
   }
   
-  addTrip(tripDetails) {
-    console.log(tripDetails[0]);
+  prepareTripDetails(tripDetails) {
     const formattedTrip = {
       id: Date.now(),
       userID: this.currentTraveler.id,
@@ -78,6 +75,6 @@ export default class TravelerRepo {
       suggestedActivities: []
     }
     console.log(formattedTrip);
+    return formattedTrip;
   }
-  //addTrip method?
 }
