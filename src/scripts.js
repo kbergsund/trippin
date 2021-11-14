@@ -46,18 +46,31 @@ const formCalendar = document.querySelector('#calendar');
 // Event Listeners
 tripCategories.addEventListener('change', toggleTripView);
 addTripForm.addEventListener('keyup', checkFormValues);
+addTripForm.addEventListener('change', checkFormValues);
 addTripForm.addEventListener('submit', (event) => {
   addTrip(event);
 });
 
 // Event Handlers
-function checkFormValues() {
+const formatFormValues = () => {
   const elementIndexes = Object.keys(addTripForm.elements);
-  elementIndexes.splice(4, 3);
+  elementIndexes.splice(4, 4);
   const formValues = elementIndexes.reduce((acc, number)=> {
-    acc.push(addTripForm.elements[number].value);
+    if (addTripForm.elements[number].value === 'Destinations') {
+      acc.push('')
+    } else {
+      acc.push(addTripForm.elements[number].value);
+    }
     return acc;
   }, [])
+  if (formValues[1].length > 0) {
+    formValues[1] = dayjs(formValues[1]).format('YYYY/MM/DD')
+  }
+  return formValues;
+}
+
+function checkFormValues() {
+  const formValues = formatFormValues();
   console.log(formValues);
   if (travelerRepo.estimateTripCost(formValues)) {
     addTripForm.childNodes[3].innerText = 
@@ -67,7 +80,9 @@ function checkFormValues() {
 
 function addTrip(e) {
   e.preventDefault();
+  travelerRepo.addTrip(formatFormValues())
   addTripForm.reset();
+  // const formValues = formatFormValues();
   addTripForm.childNodes[3].innerText = ``
   console.log('submitted');
   // tripDetails = {
