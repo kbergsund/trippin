@@ -3,12 +3,17 @@ const dayjs = require('dayjs');
 
 export default class TravelerRepo {
   constructor(travelerData, tripData, destinationData) {
-    this.allTravelers = travelerData;
+    console.log(travelerData);
+    // this.currentTraveler = new Traveler(travelerData, this.retrieveTravelersTrips(travelerData.id));
     this.allTrips = tripData;
     this.allDestinations = destinationData;
+    this.currentTraveler = travelerData;
+    // this.allTrips = this.updateTrips(tripData);
   }
 
   updateTrips() {
+    // console.log(this.allDestinations);
+    // console.log(this.allTrips);
     this.allTrips.map(trip => {
       const destination = this.allDestinations
         .find(destination => destination.id === trip.destinationID)
@@ -20,10 +25,10 @@ export default class TravelerRepo {
     })
   }
 
-  retrieveTraveler(id) {
-    this.currentTraveler = this.allTravelers
-      .find(traveler => traveler.id === id);
-  }
+  // retrieveTraveler(id) {
+  //   this.currentTraveler = this.currentTraveler
+  //     .find(traveler => traveler.id === id);
+  // }
 
   retrieveTravelersTrips(userID) {
     return this.allTrips.filter(trip => trip.userID === userID);
@@ -31,9 +36,10 @@ export default class TravelerRepo {
 
   buildTravelers() {
     this.updateTrips();
-    this.allTravelers = this.allTravelers.map(traveler => {
-      return new Traveler(traveler, this.retrieveTravelersTrips(traveler.id));
-    })
+    // console.log(Object.keys(this.currentTraveler))
+    this.currentTraveler =
+      new Traveler(this.currentTraveler, this.retrieveTravelersTrips(this.currentTraveler.id))
+    return this.currentTraveler;
   }
 
   retrieveDestinationId(destinationName) {
@@ -50,16 +56,16 @@ export default class TravelerRepo {
     if (tripDetails.every(value => value.length !== 0)) {
       const requestedDestination = this.allDestinations
         .find(destination => destination.destination === tripDetails[0])
-      const flights = tripDetails[3] * 
+      const flights = tripDetails[3] *
         requestedDestination.estimatedFlightCostPerPerson;
-      const lodging = tripDetails[2] * 
+      const lodging = tripDetails[2] *
         requestedDestination.estimatedLodgingCostPerDay;
       const total = flights + lodging;
       const travelAgent = total * 0.1
       return total + travelAgent;
     }
   }
-  
+
   prepareTripDetails(tripDetails) {
     const formattedTrip = {
       id: Date.now(),

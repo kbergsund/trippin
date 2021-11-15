@@ -24,6 +24,15 @@ body {
   padding: 1.5em;
 }
 
+header,
+main {
+  display: none;
+}
+
+section {
+  border: 1px solid purple;
+}
+
 h1 {
   font-size: 1.4em;
   color: #21BF85;
