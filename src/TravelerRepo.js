@@ -20,6 +20,11 @@ export default class TravelerRepo {
     })
   }
 
+  retrieveTraveler(id) {
+    this.currentTraveler = this.allTravelers
+      .find(traveler => traveler.id === id);
+  }
+
   retrieveTravelersTrips(userID) {
     return this.allTrips.filter(trip => trip.userID === userID);
   }
@@ -29,24 +34,16 @@ export default class TravelerRepo {
     this.allTravelers = this.allTravelers.map(traveler => {
       return new Traveler(traveler, this.retrieveTravelersTrips(traveler.id));
     })
-    console.log(this.allDestinations);
-  }
-
-  retrieveTraveler(id) {
-    this.currentTraveler = this.allTravelers
-      .find(traveler => traveler.id === id);
   }
 
   retrieveDestinationId(destinationName) {
     return this.allDestinations.reduce((id, destination) => {
       if (destination.destination === destinationName) {
-        console.log(destination.id);
         id = destination.id;
         return id;
       }
       return id;
     }, 0)
-    // return foundDestinationId
   }
 
   estimateTripCost(tripDetails) {

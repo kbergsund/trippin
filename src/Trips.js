@@ -15,6 +15,8 @@ export default class Trips {
     })
   }
 
+  //refactor this by just doing a forEach within totalCostThisYear? 
+  // We don't necessarily need individual cost.
   calculateTripCost(id) {
     const trip = this.trips.find(trip => trip.id === id);
     const flights = trip.travelers * trip.estimatedFlightCostPerPerson;

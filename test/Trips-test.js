@@ -33,7 +33,6 @@ describe('Trips', function() {
   })
 
   it('should find the total cost of all trips so far this year', function() {
-    // trips.calculateTotalCostThisYear()
     assert.equal(trips.totalCost, 8668);
   });
 

@@ -356,11 +356,14 @@ const categorizedTravelersTrips = {
   ]
 }
 
+const sampleTripDetails = ['Toronto, Canada', '2021/11/24', '4', '2']
+
 export {
   travelerData,
   tripData,
   destinationData,
   tripDestinationData,
   travelerSpecificTrips,
-  categorizedTravelersTrips
+  categorizedTravelersTrips,
+  sampleTripDetails
 }
