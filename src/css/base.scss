@@ -1,8 +1,6 @@
 @import 'reset';
 @import '_variables';
 
-/* ~~~~~~~~~~ GLOBAL RULES ~~~~~~~~~~ */
-
 * {
   box-sizing: border-box;
   border: 0;
@@ -11,17 +9,25 @@
 html {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 24px;
-  color: #2B2843;
+  color: #2B2843; 
+  // height: 300vh;
+  border: 1px solid orange;
+  background-color: #F5FAF8;
 }
 
 body {
-  background-color: #F5FAF8;
+  border: 1px solid blue;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  // justify-content: space-between;
-  min-height: fit-content;
   padding: 1.5em;
+}
+
+header, 
+main {
+  border: 1px solid green;
+  border-radius: 50px;
+  padding: 1em;
 }
 
 h1 {
@@ -44,48 +50,23 @@ p {
   font-size: .65em;
 }
 
-header,
-main {
-  border-radius: 50px;
-  padding: 1em;
-}
-
 input,
 select {
   height: 2.75em;
   padding: .2em 1em;
+  border-radius: 15px;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 input[type=date] {
   font-family: inherit;
 }
 
-header,
-main,
-input,
-select
-.add-trip-input-fields,
-.trip-categories,
-.current-trip {
-  box-shadow: 0px 5px 20px -5px rgba(33,191,133, 0.25);
-}
 
-input,
-button,
-select,
-.add-trip-input-fields,
-.trips section,
-.current-trip {
-  border-radius: 15px;
-}
 
-button:hover,
-input:hover,
-select:hover {
-  cursor: pointer;
-}
-
-/* ~~~~~~~~~~ HEADER RULES ~~~~~~~~~~ */
 header {
   background-blend-mode: hard-light;
   background-color: rgba(255, 255, 255, .2);
@@ -95,26 +76,30 @@ header {
   display: flex;
   flex-direction: column;
   height: 8.5em;
-  justify-content: space-between;
+  // justify-content: space-between;
 
-  div {
+  .header-top-section {
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
 
-  form {
+  .add-trip {
     min-height: 3.25em;
     display: flex;
     justify-content: space-between;
     align-items: center;
-  
+
     .add-trip-input-fields {
       padding: 0 .5em;
       height: 80%;
       width: 75%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       flex-wrap: wrap;
       background-color: #D5F2E8;
+      border-radius: 15px;
   
       .destinations {
         width: 30%;
@@ -126,129 +111,43 @@ header {
       color: #fff;
       font-size: .8em;
       font-weight: 700;
-      height: 2em;
-      padding: .5em 1em;
+      height: 2.2em;
+      padding: .5em 1.2em;
+      border-radius: 15px;
+
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
 }
 
-/* NOT ACCESSIBLE- need pseudoclass for tabbing/enter */
 .user-info-dropdown {
-  display: flex;
-  justify-content: flex-end;
-
-  .dropdown-button {
-    background: none;
-    padding: .5em;
-  
-    img {
-      height: 2.5em;
-    }
-  }
-
-  .dropdown-content {
-    display: none;
-    border-radius: 10px;
-    padding: .5em;
-    min-height: 3.5em;
-    width: 20%;
-    margin-right: 1.8em;
-    background-color: #fff;
-    position: absolute;
-    top: 60px;
-    right: 35px;
-    font-size: 1.7em;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    // z-index: 1;
-  }
-
-  &:hover .dropdown-content {
-    display: block;
-  }   
-
+  border: 1px solid purple;
 }
 
-/* ~~~~~~~~~~ MAIN RULES ~~~~~~~~~~ */
+img {
+  height: 2.5em;
+}
+
 main {
   background-color: #fff;
   margin-top: 1.3em;
   height: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  // display: flex;
+  // flex-direction: column;
+  // justify-content: space-between;
 
-  section {
-    display: flex;
-    justify-content: space-between;
-  }
+  .upcoming,
+  .past,
+  .pending {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 300px));
+    // display: flex;
+    // flex-direction: column;
+    border: 1px solid purple;
 
-  .main-top-section {
-    height: auto;
-    display: flex;
-    justify-content: space-between;
-    padding: 0 1em 0 1em;
-
-    .my-trips-dropdown {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      min-width: 15%;
-      
-      .trip-categories {
-        background-color: #D5F2E8;
-      }
-    }
-
-    .current-trip {
-      background-color: #D5F2E8;
-      height: 4em;
-      width: 40%;
-      padding: 1em;
-
-      .current-destination {
-        // border: 1px solid green;
-        flex-direction: column;
-        align-items: flex-end;
-        justify-content: space-evenly;
-        text-align: right;
-      }
-    }
-  }
-
-  .trips {
-    padding: 1em;
-    height: auto;
-    /* to account for glide arrow...?*/
-    // padding-right: 5em;
-    flex-wrap: wrap;
-  
-    section {
-      height: 11em;
-      min-width: fit-content;
-      width: 25%;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: flex-end;
-      justify-content: flex-end;
-      box-shadow: 0px 6px 20px -3px rgba(33,191,133, .7);
-    }
-  
-    div {
-      display: flex;
-      flex-direction: column;
-      min-height: fit-content;
-      margin: 0 1em 1em 0;
-      justify-content: space-around;
-      height: 3.25em;
-    }
-  
-    .trip-info {
-      background-color: #fff;
-      border-radius: 10px;
-      padding: .5em;
-      min-height: fit-content;
-      width: 70%;
-      text-align: right;
-    }
+    // section {
+    //   width: 20%;
+    // }
   }
 }

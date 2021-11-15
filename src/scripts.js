@@ -176,19 +176,19 @@ const generateFormDestinations = () => {
 function toggleTripView() {
   switch (tripCategories.value) {
   case 'upcoming':
-    upcoming.style.display = 'block';
+    upcoming.style.display = 'grid';
     past.style.display = 'none';
     pending.style.display = 'none';
     break;
   case 'past':
     upcoming.style.display = 'none';
-    past.style.display = 'block';
+    past.style.display = 'grid';
     pending.style.display = 'none';
     break;
   case 'pending':
     upcoming.style.display = 'none';
     past.style.display = 'none';
-    pending.style.display = 'block';
+    pending.style.display = 'grid';
     break;
   }
 }
