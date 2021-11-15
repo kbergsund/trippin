@@ -90,7 +90,7 @@ function addTrip(e) {
 // Functions
 const generateDOM = () => {
   const randomID = getRandomIndex(travelerRepo.allTravelers);
-  travelerRepo.retrieveTraveler(3);
+  travelerRepo.retrieveTraveler(randomID);
   const traveler = travelerRepo.currentTraveler
   console.log(travelerRepo.currentTraveler);
   restrictCalendarMinDate();
@@ -102,7 +102,7 @@ const generateDOM = () => {
 }
 
 const displayUserInfo = (traveler) => {
-  userDropdown.innerHTML = `
+  userDropdown.innerHTML += `
   <p>${traveler.name}</p>
   <p>I am a: ${traveler.travelerType}</p>
   <p>2021 Total Spend: $${traveler.myTrips.calculateTotalCostThisYear()}<p>
@@ -176,19 +176,19 @@ const generateFormDestinations = () => {
 function toggleTripView() {
   switch (tripCategories.value) {
   case 'upcoming':
-    upcoming.style.display = 'block';
+    upcoming.style.display = 'grid';
     past.style.display = 'none';
     pending.style.display = 'none';
     break;
   case 'past':
     upcoming.style.display = 'none';
-    past.style.display = 'block';
+    past.style.display = 'grid';
     pending.style.display = 'none';
     break;
   case 'pending':
     upcoming.style.display = 'none';
     past.style.display = 'none';
-    pending.style.display = 'block';
+    pending.style.display = 'grid';
     break;
   }
 }
