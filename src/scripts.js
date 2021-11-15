@@ -10,14 +10,15 @@ let travelerRepo;
 
 const retrieveData = (id) => {
   Promise.all(
-    [fetchData(`travelers/${id}`), fetchData('trips'), fetchData('destinations')]
+    [fetchData(`travelers/${id}`), fetchData('trips'),
+      fetchData('destinations')]
   ).then(data => {
     console.log(data[2]),
     buildTravelerRepo(
       data[0], 
       Object.values(data[1]).flat(), 
       Object.values(data[2]).flat());
-    generateDOM(id);
+    generateDOM();
   })
 }
 
@@ -29,9 +30,9 @@ const buildTravelerRepo = (travelerData, tripData, destinationData) => {
 
 // DOM MANIPULATION
 
-const getRandomIndex = (array) => {
-  return Math.floor(Math.random() * array.length + 1);
-};
+// const getRandomIndex = (array) => {
+//   return Math.floor(Math.random() * array.length + 1);
+// };
 
 // Query Selectors
 const userDropdown = document.querySelector('#dropdownContent');
@@ -48,10 +49,9 @@ const header = document.querySelector('header');
 const main = document.querySelector('main');
 
 // Event Listeners
-// window.addEventListener('load', pageLoadLogin);
 tripCategories.addEventListener('change', toggleTripView);
-addTripForm.addEventListener('keyup', checkFormValues);
-addTripForm.addEventListener('change', checkFormValues);
+addTripForm.addEventListener('keyup', displayCostEstimate);
+addTripForm.addEventListener('change', displayCostEstimate);
 addTripForm.addEventListener('submit', (event) => {
   addTrip(event);
 });
@@ -59,13 +59,7 @@ loginForm.addEventListener('submit', (event) => {
   checkLogin(event);
 });
 
-function pageLoadLogin() {
-  header.style.display = 'none';
-  main.style.display = 'none';
-
-  //retrieveData()
-}
-
+// Event Handlers
 function checkLogin(e) {
   e.preventDefault();
   const username = loginForm.elements[0].value;
@@ -85,10 +79,8 @@ function checkLogin(e) {
   }
 }
 
-// Event Handlers
-function checkFormValues() {
+function displayCostEstimate() {
   const formValues = formatFormValues();
-  console.log(formValues);
   if (travelerRepo.estimateTripCost(formValues)) {
     addTripForm.childNodes[3].innerText = 
       `Estimated Total Cost: ~$${travelerRepo.estimateTripCost(formValues)}`
@@ -100,16 +92,21 @@ function addTrip(e) {
   const trip = travelerRepo.prepareTripDetails(formatFormValues())
   postData(trip);
   addTripForm.reset();
-  // ADD SUCCESS MESSAGING
+  // ADD SUCCESS MESSAGING- setTimeout??
   addTripForm.childNodes[3].innerText = ``
 }
 
+
 // Functions
-const generateDOM = (userID) => {
+function pageLoadLoginDisplay() {
+  header.style.display = 'none';
+  main.style.display = 'none';
+}
+
+const generateDOM = () => {
   // const randomID = getRandomIndex(travelerRepo.allTravelers);
   // travelerRepo.retrieveTraveler(userID);
   const traveler = travelerRepo.currentTraveler
-  console.log(travelerRepo.currentTraveler);
   restrictCalendarMinDate();
   generateFormDestinations();
   displayUserInfo(traveler);
@@ -227,8 +224,7 @@ function toggleTripView() {
   }
 }
 
-pageLoadLogin();
-// retrieveData();
+pageLoadLoginDisplay();
 
 export {
   retrieveData

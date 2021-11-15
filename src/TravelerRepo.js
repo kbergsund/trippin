@@ -1,19 +1,15 @@
 import Traveler from './Traveler';
-const dayjs = require('dayjs');
 
 export default class TravelerRepo {
   constructor(travelerData, tripData, destinationData) {
-    console.log(travelerData);
-    // this.currentTraveler = new Traveler(travelerData, this.retrieveTravelersTrips(travelerData.id));
     this.allTrips = tripData;
     this.allDestinations = destinationData;
     this.currentTraveler = travelerData;
+    // this.currentTraveler = new Traveler(travelerData, this.retrieveTravelersTrips(travelerData.id));
     // this.allTrips = this.updateTrips(tripData);
   }
 
   updateTrips() {
-    // console.log(this.allDestinations);
-    // console.log(this.allTrips);
     this.allTrips.map(trip => {
       const destination = this.allDestinations
         .find(destination => destination.id === trip.destinationID)
@@ -36,9 +32,9 @@ export default class TravelerRepo {
 
   buildTravelers() {
     this.updateTrips();
-    // console.log(Object.keys(this.currentTraveler))
     this.currentTraveler =
-      new Traveler(this.currentTraveler, this.retrieveTravelersTrips(this.currentTraveler.id))
+      new Traveler(this.currentTraveler, 
+        this.retrieveTravelersTrips(this.currentTraveler.id))
     return this.currentTraveler;
   }
 
@@ -67,6 +63,7 @@ export default class TravelerRepo {
   }
 
   prepareTripDetails(tripDetails) {
+    // move this to script??
     const formattedTrip = {
       id: Date.now(),
       userID: this.currentTraveler.id,
