@@ -1,6 +1,7 @@
 @import 'reset';
 @import '_variables';
 
+/* ~~~~~~~~~~ GLOBAL RULES ~~~~~~~~~~ */
 * {
   box-sizing: border-box;
   border: 0;
@@ -10,22 +11,39 @@ html {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 24px;
   color: #2B2843; 
-  // height: 300vh;
-  border: 1px solid orange;
   background-color: #F5FAF8;
 }
 
 body {
-  border: 1px solid blue;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   padding: 1.5em;
 }
 
+main,
+header {
+box-shadow: 0px 5px 20px -5px rgba(33,191,133, 0.25)
+}
+
+input,
+select,
+.trip-categories,
+.add-trip-input-fields,
+.current-trip,
+.add-trip button,
+.dropdown-content {
+  box-shadow: 0px 3px 20px -10px rgba(0,0,0, 0.5)
+}
+
+.upcoming section,
+.past section,
+.pending section {
+  box-shadow: 0px 5px 20px -5px rgba(0,0,0, 0.5)
+}
+
 header, 
 main {
-  border: 1px solid green;
   border-radius: 50px;
   padding: 1em;
 }
@@ -65,8 +83,7 @@ input[type=date] {
   font-family: inherit;
 }
 
-
-
+/* ~~~~~~~~~~ HEADER RULES ~~~~~~~~~~ */
 header {
   background-blend-mode: hard-light;
   background-color: rgba(255, 255, 255, .2);
@@ -75,8 +92,8 @@ header {
   background-position: center;
   display: flex;
   flex-direction: column;
-  height: 8.5em;
-  // justify-content: space-between;
+  height: 8em;
+  justify-content: space-between;
 
   .header-top-section {
     display: flex;
@@ -123,31 +140,102 @@ header {
 }
 
 .user-info-dropdown {
-  border: 1px solid purple;
+  display: flex;
+  justify-content: flex-end;
+
+  img {
+    height: 2.5em;
+  }
+
+  .dropdown-button {
+    background: none;
+  }
+
+  .dropdown-content {
+    position: absolute;
+    display: none;
+    background-color: #fff;
+    border-radius: 15px;
+    padding: .5em;
+    height: 4em;
+    font-size: 1.2em;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+
+  &:focus .dropdown-content,
+  &:hover .dropdown-content {
+    display: flex;
+  }
 }
 
-img {
-  height: 2.5em;
-}
-
+/* ~~~~~~~~~~ MAIN RULES ~~~~~~~~~~ */
 main {
   background-color: #fff;
   margin-top: 1.3em;
-  height: auto;
-  // display: flex;
-  // flex-direction: column;
-  // justify-content: space-between;
 
-  .upcoming,
-  .past,
-  .pending {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 300px));
-    // display: flex;
-    // flex-direction: column;
-    border: 1px solid purple;
+  .main-top-section {
+    height: 4em;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 1em;
 
-    // section {
-    //   width: 20%;
-    // }
+    .my-trips-and-dropdown {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-width: 15%;
+
+      .trip-categories {
+        background-color: #D5F2E8;
+      }
+    }
+
+    .current-trip {
+      background-color: #D5F2E8;
+      border-radius: 15px;
+      width: 40%;
+      padding: 1em;
+
+      .current-destination {
+        flex-direction: column;
+        align-items: flex-end;
+        justify-content: space-evenly;
+        text-align: right;
+      }
+    }
+  }
+
+  .trips {
+    padding: 1em;
+
+    .upcoming,
+    .past,
+    .pending {
+      grid-template-columns: repeat(auto-fill, minmax(300px, 40%));
+      grid-gap: 2em;
+      justify-content: center;
+  
+      section {
+        height: 11em;
+        border-radius: 25px;
+        padding: .8em;
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-end;
+  
+        .trip-info {
+          background-color: #fff;
+          border-radius: 15px;
+          padding: .5em;
+          width: 60%;
+          text-align: right;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          height: 3.7em;
+        }
+      }
+    }
   }
 }
