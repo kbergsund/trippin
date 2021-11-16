@@ -139,12 +139,14 @@ const generateTripCards = (traveler) => {
       traveler.myTrips.categorizedTrips[category].forEach(trip => {
         window[category].innerHTML += `
         <section id="${trip.id}">
-          <span role="background-img-alt-text" aria-label="${trip.alt}" </span>
-          <div class="trip-info">
-            <h3>${trip.destination}</h3>
-            <p>${dayjs(trip.date).format('M/D/YYYY')}, ${trip.duration} days<p>
-            <p>${trip.travelers} travelers</p>
-          </div>
+          <span role="background-img-alt-text" aria-label="${trip.alt}"
+            <div class="trip-info">
+              <h3>${trip.destination}</h3>
+              <p>${dayjs(trip.date).format('M/D/YYYY')}, 
+                ${trip.duration} days<p>
+              <p>${trip.travelers} travelers</p>
+            </div>
+          </span>
         </section>
         `
         addBackgroundImage(trip.id, trip.image)

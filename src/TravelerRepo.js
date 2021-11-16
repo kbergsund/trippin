@@ -52,6 +52,7 @@ export default class TravelerRepo {
   }
 
   estimateTripCost(tripDetails) {
+    const priceFormatter = new Intl.NumberFormat();
     if (tripDetails.every(value => value.length !== 0)) {
       const requestedDestination = this.allDestinations
         .find(destination => destination.destination === tripDetails[0])
@@ -61,7 +62,7 @@ export default class TravelerRepo {
         requestedDestination.estimatedLodgingCostPerDay;
       const total = flights + lodging;
       const travelAgent = total * 0.1
-      return total + travelAgent;
+      return priceFormatter.format(total + travelAgent);
     }
   }
 

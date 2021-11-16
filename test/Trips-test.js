@@ -29,7 +29,7 @@ describe('Trips', function() {
   })
 
   it('should calculate the cost of a single trip given a trip id', function() {
-    assert.equal(user3Trips.calculateTripCost(3), 4543)
+    assert.equal(user3Trips.calculateTripCost(3), '4,543')
   })
 
   it('should find the total cost of all trips so far this year', function() {
