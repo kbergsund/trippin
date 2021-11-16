@@ -8,12 +8,14 @@ const dayjs = require('dayjs');
 // Global Variable
 let travelerRepo;
 
-const retrieveData = () => {
+const retrieveData = (id) => {
   Promise.all(
-    [fetchData('travelers'), fetchData('trips'), fetchData('destinations')]
+    [fetchData(`travelers/${id}`), fetchData('trips'),
+      fetchData('destinations')]
   ).then(data => {
+    console.log(data[2]),
     buildTravelerRepo(
-      Object.values(data[0])[0], 
+      data[0], 
       Object.values(data[1]).flat(), 
       Object.values(data[2]).flat());
     generateDOM();
@@ -28,9 +30,9 @@ const buildTravelerRepo = (travelerData, tripData, destinationData) => {
 
 // DOM MANIPULATION
 
-const getRandomIndex = (array) => {
-  return Math.floor(Math.random() * array.length + 1);
-};
+// const getRandomIndex = (array) => {
+//   return Math.floor(Math.random() * array.length + 1);
+// };
 
 // Query Selectors
 const userDropdown = document.querySelector('#dropdownContent');
@@ -40,38 +42,45 @@ const upcoming = document.querySelector('#upcoming');
 const past = document.querySelector('#past');
 const pending = document.querySelector('#pending');
 const addTripForm = document.querySelector('#add-trip-form');
-const formDestinations = document.querySelector('#destinations');
-const formCalendar = document.querySelector('#calendar');
+const tripFormDestinations = document.querySelector('#destinations');
+const tripFormCalendar = document.querySelector('#calendar');
+const loginForm = document.querySelector('#login');
+const header = document.querySelector('header');
+const main = document.querySelector('main');
 
 // Event Listeners
 tripCategories.addEventListener('change', toggleTripView);
-addTripForm.addEventListener('keyup', checkFormValues);
-addTripForm.addEventListener('change', checkFormValues);
+addTripForm.addEventListener('keyup', displayCostEstimate);
+addTripForm.addEventListener('change', displayCostEstimate);
 addTripForm.addEventListener('submit', (event) => {
   addTrip(event);
 });
+loginForm.addEventListener('submit', (event) => {
+  checkLogin(event);
+});
 
 // Event Handlers
-const formatFormValues = () => {
-  const elementIndexes = Object.keys(addTripForm.elements);
-  elementIndexes.splice(4, 4);
-  const formValues = elementIndexes.reduce((acc, number)=> {
-    if (addTripForm.elements[number].value === 'Destinations') {
-      acc.push('')
-    } else {
-      acc.push(addTripForm.elements[number].value);
-    }
-    return acc;
-  }, [])
-  if (formValues[1].length > 0) {
-    formValues[1] = dayjs(formValues[1]).format('YYYY/MM/DD')
+function checkLogin(e) {
+  e.preventDefault();
+  const username = loginForm.elements[0].value;
+  const splitUsername = username.split('r');
+  const userID = parseInt(splitUsername[2]);
+  const password = loginForm.elements[1].value;
+  if (username.substring(0, 8) === 'traveler' && password === 'traveler'
+    && userID > 0 && userID <= 50) {
+    header.style.display = 'block';
+    main.style.display = 'block';
+    loginForm.style.display = 'none';
+    retrieveData(userID);
+  } else {
+    loginForm.innerHTML += `
+    <p>Incorrect username or password. Please try again.</p>
+    `
   }
-  return formValues;
 }
 
-function checkFormValues() {
+function displayCostEstimate() {
   const formValues = formatFormValues();
-  console.log(formValues);
   if (travelerRepo.estimateTripCost(formValues)) {
     addTripForm.childNodes[3].innerText = 
       `Estimated Total Cost: ~$${travelerRepo.estimateTripCost(formValues)}`
@@ -83,16 +92,21 @@ function addTrip(e) {
   const trip = travelerRepo.prepareTripDetails(formatFormValues())
   postData(trip);
   addTripForm.reset();
-  // ADD SUCCESS MESSAGING
+  // ADD SUCCESS MESSAGING- setTimeout??
   addTripForm.childNodes[3].innerText = ``
 }
 
+
 // Functions
+function pageLoadLoginDisplay() {
+  header.style.display = 'none';
+  main.style.display = 'none';
+}
+
 const generateDOM = () => {
-  const randomID = getRandomIndex(travelerRepo.allTravelers);
-  travelerRepo.retrieveTraveler(randomID);
+  // const randomID = getRandomIndex(travelerRepo.allTravelers);
+  // travelerRepo.retrieveTraveler(userID);
   const traveler = travelerRepo.currentTraveler
-  console.log(travelerRepo.currentTraveler);
   restrictCalendarMinDate();
   generateFormDestinations();
   displayUserInfo(traveler);
@@ -162,15 +176,32 @@ const addBackgroundImage = (id, img) => {
 } 
 
 const restrictCalendarMinDate = () => {
-  formCalendar.min = new Date().toISOString().substr(0, 10);
+  tripFormCalendar.min = new Date().toISOString().substr(0, 10);
 }
 
 const generateFormDestinations = () => {
   travelerRepo.allDestinations.forEach(destination => {
-    formDestinations.innerHTML += `
+    tripFormDestinations.innerHTML += `
     <option>${destination.destination}</option>
     `
   })
+}
+
+const formatFormValues = () => {
+  const elementIndexes = Object.keys(addTripForm.elements);
+  elementIndexes.splice(4, 4);
+  const formValues = elementIndexes.reduce((acc, number)=> {
+    if (addTripForm.elements[number].value === 'Destinations') {
+      acc.push('')
+    } else {
+      acc.push(addTripForm.elements[number].value);
+    }
+    return acc;
+  }, [])
+  if (formValues[1].length > 0) {
+    formValues[1] = dayjs(formValues[1]).format('YYYY/MM/DD')
+  }
+  return formValues;
 }
 
 function toggleTripView() {
@@ -193,7 +224,7 @@ function toggleTripView() {
   }
 }
 
-retrieveData();
+pageLoadLoginDisplay();
 
 export {
   retrieveData
