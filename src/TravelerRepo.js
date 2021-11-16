@@ -66,7 +66,7 @@ export default class TravelerRepo {
       travelers: tripDetails[3],
       date: tripDetails[1],
       duration: tripDetails[2],
-      status: 'pending',
+      status: 'approved',
       suggestedActivities: []
     }
     return formattedTrip;
