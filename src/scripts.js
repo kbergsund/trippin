@@ -89,8 +89,11 @@ function addTrip(e) {
   postData(trip, travelerRepo.currentTraveler.id);
   addTripForm.reset();
   // ADD SUCCESS MESSAGING- setTimeout??
-  addTripForm.childNodes[3].innerText = ``;
-  addTripForm.childNodes[3].style.backgroundColor = 'transparent';
+  addTripForm.childNodes[3].innerText = `Trip successfully requested!`;
+  setTimeout(() => {
+    addTripForm.childNodes[3].innerText = ``;
+    addTripForm.childNodes[3].style.backgroundColor = 'transparent';
+  }, 1500);
 }
 
 
