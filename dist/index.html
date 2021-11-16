@@ -16,7 +16,7 @@
         </div>
       </div>
     </div>
-    <form class="add-trip" id="add-trip-form">
+    <form class="add-trip-form" id="add-trip-form">
       <div class="add-trip-input-fields">
         <select class="destinations" id="destinations" required>
           <option hidden>Destinations</option>
@@ -25,7 +25,7 @@
         <input aria-label="Number of days" type="number" min="1" placeholder="Days" required>
         <input aria-label="Number of people" type="number" min="1" placeholder="People" required>
       </div>
-      <p></p>
+      <p class="cost-estimate"></p>
       <button type="submit" id="submitButton" aria-label="submit-trip-request-button">Request</button>
     </form>
   </header>
@@ -54,12 +54,14 @@
       </section>
     </section>
   </main>
-  <section class="login">
-    <form class="traveler-login" id="login">
-      <h3>Traveler Login</h3>
+  <section class="traveler-login-section">
+    <form class="traveler-login-form" id="login">
+      <h1>trippin</h1>
+      <p>Traveler Login</p>
       <input type="text" placeholder="Username" required>
       <input type="password" placeholder="Password" required>
       <button type="submit">Log In</button>
+      <p id="loginError"></p>
     </form>
   </section>
   <script src="bundle.js"></script>
