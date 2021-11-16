@@ -96,6 +96,9 @@ const restrictCalendarMinDate = () => {
 }
 
 const generateFormDestinations = () => {
+  tripFormDestinations.innerHTML = `
+  <option hidden>Destinations</option>
+  `;
   travelerRepo.allDestinations.forEach(destination => {
     tripFormDestinations.innerHTML += `
     <option>${destination.destination}</option>
