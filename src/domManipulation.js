@@ -53,124 +53,6 @@ function displayCostEstimate() {
   }
 }
 
-// function addTrip(e) {
-//   e.preventDefault();
-//   const trip = travelerRepo.prepareTripDetails(formatFormValues())
-//   postData(trip, travelerRepo.currentTraveler.id);
-//   addTripForm.reset();
-//   setTimeout(() => {
-//     addTripForm.childNodes[3].innerText = ``;
-//     addTripForm.childNodes[3].style.backgroundColor = 'transparent';
-//   }, 2000);
-// }
-
-// Functions
-function pageLoadLoginDisplay() {
-  console.log(header.style.display)
-  header.style.display = 'none';
-  main.style.display = 'none';
-}
-
-const generateDOM = () => {
-  const traveler = travelerRepo.currentTraveler;
-  restrictCalendarMinDate();
-  generateFormDestinations();
-  displayUserInfo(traveler);
-  displayCurrentTrip(traveler);
-  generateTripCards(traveler);
-  toggleTripView();
-}
-
-const displayUserInfo = (traveler) => {
-  userDropdown.innerHTML = `
-  <p>${traveler.name}</p>
-  <p>I am a: ${traveler.travelerType}</p>
-  <p>2021 Total Spend: $${traveler.myTrips.calculateTotalCostThisYear()}<p>
-  `
-}
-
-const displayCurrentTrip = (traveler) => { 
-  console.log(traveler.myTrips.categorizedTrips);
-  if (traveler.myTrips.categorizedTrips.present.length > 0) {
-    const currentDestination = traveler.myTrips.categorizedTrips.present[0];
-    currentTrip.childNodes[3].innerHTML = `
-    <h3>${currentDestination.destination}<h3>
-    <p>${dayjs(currentDestination.date)
-    .format('M/D/YYYY')}, ${currentDestination.duration} days<p>
-    <p>${currentDestination.travelers} travelers</p>
-    `
-  } else {
-    currentTrip.childNodes[3].innerHTML = '<p>You\'re not currently traveling. Time to book a trip!<p>'
-  }
-}
-
-const generateTripCards = (traveler) => {
-  const myTripCategories = Object.keys(traveler.myTrips.categorizedTrips);
-  myTripCategories.splice(2, 1);
-  myTripCategories.forEach(category => {
-    if (!traveler.myTrips.categorizedTrips[category].length) {
-      window[category].innerHTML = `
-       <p>You don't have any ${category} trips!</p>
-       `
-    } else {
-      window[category].innerHTML = '';
-      traveler.myTrips.categorizedTrips[category].forEach(trip => {
-        window[category].innerHTML += `
-        <section id="${trip.id}">
-          <div class="trip-info">
-            <h3>${trip.destination}</h3>
-            <p>${dayjs(trip.date).format('M/D/YYYY')}, ${trip.duration} days<p>
-            <p>${trip.travelers} travelers</p>
-          </div>
-        </section>
-        `
-        addBackgroundImage(trip.id, trip.image)
-      })
-    }
-  })
-}
-
-const addBackgroundImage = (id, img) => {
-  const styles = {
-    'background-image': `url(${img}`,
-    'background-size': 'cover',
-    'background-position': 'center',
-    'filter': 'grayscale(100%)',
-    'color': '#000'
-  }
-  const tripSection = document.getElementById(`${id}`);
-  Object.assign(tripSection.style, styles);
-} 
-
-const restrictCalendarMinDate = () => {
-  tripFormCalendar.min = new Date().toISOString().substr(0, 10);
-}
-
-const generateFormDestinations = () => {
-  travelerRepo.allDestinations.forEach(destination => {
-    tripFormDestinations.innerHTML += `
-    <option>${destination.destination}</option>
-    `
-  })
-}
-
-// const formatFormValues = () => {
-//   const elementIndexes = Object.keys(addTripForm.elements);
-//   elementIndexes.splice(4, 4);
-//   const formValues = elementIndexes.reduce((acc, number)=> {
-//     if (addTripForm.elements[number].value === 'Destinations') {
-//       acc.push('')
-//     } else {
-//       acc.push(addTripForm.elements[number].value);
-//     }
-//     return acc;
-//   }, [])
-//   if (formValues[1].length > 0) {
-//     formValues[1] = dayjs(formValues[1]).format('YYYY/MM/DD')
-//   }
-//   return formValues;
-// }
-
 function toggleTripView() {
   switch (tripCategories.value) {
   case 'upcoming':
@@ -190,6 +72,98 @@ function toggleTripView() {
     break;
   }
 }
+
+// Functions
+function pageLoadLoginDisplay() {
+  header.style.display = 'none';
+  main.style.display = 'none';
+}
+
+const generateDOM = () => {
+  const traveler = travelerRepo.currentTraveler;
+  restrictCalendarMinDate();
+  generateFormDestinations();
+  displayUserInfo(traveler);
+  displayCurrentTrip(traveler);
+  generateTripCards(traveler);
+  toggleTripView();
+}
+
+const restrictCalendarMinDate = () => {
+  const tomorrow = new Date(new Date());
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  tripFormCalendar.min = tomorrow.toISOString().substr(0, 10);
+}
+
+const generateFormDestinations = () => {
+  travelerRepo.allDestinations.forEach(destination => {
+    tripFormDestinations.innerHTML += `
+    <option>${destination.destination}</option>
+    `
+  })
+}
+
+const displayUserInfo = (traveler) => {
+  userDropdown.innerHTML = `
+  <p>${traveler.name}</p>
+  <p>I am a: ${traveler.travelerType}</p>
+  <p>2021 Total Spend: $${traveler.myTrips.calculateTotalCostThisYear()}<p>
+  `
+}
+
+const displayCurrentTrip = (traveler) => { 
+  if (traveler.myTrips.categorizedTrips.present.length > 0) {
+    const currentDestination = traveler.myTrips.categorizedTrips.present[0];
+    currentTrip.childNodes[3].innerHTML = `
+    <h3>${currentDestination.destination}<h3>
+    <p>${dayjs(currentDestination.date)
+    .format('M/D/YYYY')}, ${currentDestination.duration} days<p>
+    <p>${currentDestination.travelers} travelers</p>
+    `
+  } else {
+    currentTrip.childNodes[3].innerHTML = 
+      '<p>You\'re not currently traveling. Time to book a trip!<p>'
+  }
+}
+
+const generateTripCards = (traveler) => {
+  const myTripCategories = Object.keys(traveler.myTrips.categorizedTrips);
+  myTripCategories.splice(2, 1);
+  myTripCategories.forEach(category => {
+    if (!traveler.myTrips.categorizedTrips[category].length) {
+      window[category].innerHTML = `
+       <p>You don't have any ${category} trips!</p>
+       `
+    } else {
+      window[category].innerHTML = '';
+      traveler.myTrips.categorizedTrips[category].forEach(trip => {
+        window[category].innerHTML += `
+        <section id="${trip.id}">
+          <span role="background-img-alt-text" aria-label="${trip.alt}" </span>
+          <div class="trip-info">
+            <h3>${trip.destination}</h3>
+            <p>${dayjs(trip.date).format('M/D/YYYY')}, ${trip.duration} days<p>
+            <p>${trip.travelers} travelers</p>
+          </div>
+        </section>
+        `
+        addBackgroundImage(trip.id, trip.image)
+      })
+    }
+  })
+}
+
+const addBackgroundImage = (id, img) => {
+  const styles = {
+    'background-image': `url(${img})`,
+    'background-size': 'cover',
+    'background-position': 'center',
+    'filter': 'grayscale(100%)',
+    'color': '#000'
+  }
+  const tripSection = document.getElementById(`${id}`);
+  Object.assign(tripSection.style, styles);
+} 
 
 export {
   pageLoadLoginDisplay,

@@ -46,7 +46,6 @@ export default class Trips {
       } else if (dayjs().isAfter(trip.date, 'day')) {
         obj.past.push(trip);
       } else if (dayjs().isSame(trip.date, 'day')) {
-        console.log('same');
         obj.present.push(trip);
       } else if (dayjs().isBefore(trip.date, 'day')) {
         obj.upcoming.push(trip);

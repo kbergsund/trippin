@@ -3,8 +3,18 @@ import Traveler from './Traveler';
 export default class TravelerRepo {
   constructor(travelerData, tripData, destinationData) {
     this.allTrips = tripData;
-    this.allDestinations = destinationData;
+    this.allDestinations = this.sortDestinations(destinationData);
     this.currentTraveler = travelerData;
+  }
+
+  sortDestinations(destinationData) {
+    return destinationData.sort((a, b) => {
+      if (a.destination < b.destination) {
+        return -1;
+      } else if (a.destination > b.destination) {
+        return 1;
+      }
+    })
   }
 
   updateTrips() {
