@@ -39,7 +39,7 @@ const pending = document.querySelector('#pending');
 const addTripForm = document.querySelector('#add-trip-form');
 const tripFormDestinations = document.querySelector('#destinations');
 const tripFormCalendar = document.querySelector('#calendar');
-const loginForm = document.querySelector('#login');
+const travelerLogin = document.querySelector('#login');
 const header = document.querySelector('header');
 const main = document.querySelector('main');
 const loginError = document.querySelector('#loginError')
@@ -51,25 +51,25 @@ addTripForm.addEventListener('change', displayCostEstimate);
 addTripForm.addEventListener('submit', (event) => {
   addTrip(event);
 });
-loginForm.addEventListener('submit', (event) => {
+travelerLogin.addEventListener('submit', (event) => {
   checkLogin(event);
 });
 
 // Event Handlers
 function checkLogin(e) {
   e.preventDefault();
-  const username = loginForm.elements[0].value;
+  const username = travelerLogin.elements[0].value;
   const splitUsername = username.split('r');
   const userID = parseInt(splitUsername[2]);
-  const password = loginForm.elements[1].value;
+  const password = travelerLogin.elements[1].value;
   if (username.substring(0, 8) === 'traveler' && password === 'travel'
     && userID > 0 && userID <= 50) {
     header.style.display = 'flex';
     main.style.display = 'block';
-    loginForm.style.display = 'none';
+    travelerLogin.style.display = 'none';
     retrieveData(userID);
   } else {
-    loginForm.reset();
+    travelerLogin.reset();
     loginError.innerText = 'Incorrect username or password. Please try again.'
   }
 }
@@ -89,11 +89,11 @@ function addTrip(e) {
   postData(trip, travelerRepo.currentTraveler.id);
   addTripForm.reset();
   // ADD SUCCESS MESSAGING- setTimeout??
-  addTripForm.childNodes[3].innerText = `Trip successfully requested!`;
+  // addTripForm.childNodes[3].innerText = `Trip successfully requested!`;
   setTimeout(() => {
     addTripForm.childNodes[3].innerText = ``;
     addTripForm.childNodes[3].style.backgroundColor = 'transparent';
-  }, 1500);
+  }, 2000);
 }
 
 
