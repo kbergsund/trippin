@@ -91,7 +91,7 @@ const displayUserInfo = (traveler) => {
   `
 }
 
-const displayCurrentTrip = (traveler) => {
+const displayCurrentTrip = (traveler) => { 
   console.log(traveler.myTrips.categorizedTrips);
   if (traveler.myTrips.categorizedTrips.present.length > 0) {
     const currentDestination = traveler.myTrips.categorizedTrips.present[0];

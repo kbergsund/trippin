@@ -5,8 +5,6 @@ export default class TravelerRepo {
     this.allTrips = tripData;
     this.allDestinations = destinationData;
     this.currentTraveler = travelerData;
-    // this.currentTraveler = new Traveler(travelerData, this.retrieveTravelersTrips(travelerData.id));
-    // this.allTrips = this.updateTrips(tripData);
   }
 
   updateTrips() {
@@ -58,7 +56,6 @@ export default class TravelerRepo {
   }
 
   prepareTripDetails(tripDetails) {
-    // move this to script??
     const formattedTrip = {
       id: Date.now(),
       userID: this.currentTraveler.id,
