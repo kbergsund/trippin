@@ -139,7 +139,7 @@ header {
   }
 }
 
-.user-info-dropdown {
+.user-info-dropdown-section {
   display: flex;
   justify-content: flex-end;
 
@@ -147,7 +147,7 @@ header {
     height: 2.5em;
   }
 
-  .dropdown-button {
+  .show-dropdown-content {
     background: none;
   }
 
@@ -180,7 +180,7 @@ main {
     justify-content: space-between;
     padding: 0 1em;
 
-    .my-trips-and-dropdown {
+    .my-trips-category-dropdown {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
