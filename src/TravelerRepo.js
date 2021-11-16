@@ -21,11 +21,6 @@ export default class TravelerRepo {
     })
   }
 
-  // retrieveTraveler(id) {
-  //   this.currentTraveler = this.currentTraveler
-  //     .find(traveler => traveler.id === id);
-  // }
-
   retrieveTravelersTrips(userID) {
     return this.allTrips.filter(trip => trip.userID === userID);
   }
@@ -74,7 +69,6 @@ export default class TravelerRepo {
       status: 'pending',
       suggestedActivities: []
     }
-    console.log(formattedTrip);
     return formattedTrip;
   }
 }
