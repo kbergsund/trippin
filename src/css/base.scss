@@ -26,7 +26,7 @@ header {
 display: none;
 border-radius: 50px;
 padding: 1em;
-box-shadow: 0px 5px 20px -5px rgba(33,191,133, 0.25);
+box-shadow: 0px 7px 20px -5px rgba(33,191,133, 0.25);
 }
 
 input,
@@ -80,6 +80,37 @@ input[type=date] {
   font-family: inherit;
 }
 
+/* ~~~~~~~~~~ LOGIN RULES ~~~~~~~~~~ */
+.traveler-login-section {
+  height: 12em;
+
+  .traveler-login-form {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  button {
+    width: 10%;
+    height: 2.5em;
+    border-radius: 15px;
+    background-color: #D5F2E8;
+    transition: background-color 200ms ease;
+
+    &:hover {
+      cursor: pointer;
+      background-color: #21BF85;
+    }
+  }
+
+  p {
+    font-weight: 700;
+  }
+}
+
+
 /* ~~~~~~~~~~ HEADER RULES ~~~~~~~~~~ */
 header {
   background-blend-mode: hard-light;
@@ -98,7 +129,7 @@ header {
     align-items: center;
   }
 
-  .add-trip {
+  .add-trip-form {
     min-height: 3.25em;
     display: flex;
     justify-content: space-between;
@@ -106,7 +137,7 @@ header {
 
     .add-trip-input-fields {
       padding: 0 .5em;
-      height: 80%;
+      min-height: 80%;
       width: 75%;
       display: flex;
       justify-content: space-between;
@@ -114,7 +145,7 @@ header {
       flex-wrap: wrap;
       background-color: #D5F2E8;
       border-radius: 15px;
-  
+
       .destinations {
         width: 30%;
       }
@@ -128,12 +159,22 @@ header {
       height: 2.2em;
       padding: .5em 1.2em;
       border-radius: 15px;
+      transition: background-color 200ms ease;
 
       &:hover {
         cursor: pointer;
+        background-color: #FE8243;
+        // background-color: scale(#E86D18, $lightness: 30%);
       }
     }
   }
+}
+
+.cost-estimate {
+  border-radius: 15px;
+  padding: .5em;
+  text-align: center;
+  width: 7em;
 }
 
 .user-info-dropdown-section {
@@ -185,6 +226,11 @@ main {
 
       .trip-categories {
         background-color: #D5F2E8;
+        transition: background-color 200ms ease;
+
+        &:hover {
+          background-color: #21BF85;
+        }
       }
     }
 

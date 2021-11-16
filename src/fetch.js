@@ -6,7 +6,7 @@ const fetchData = (url) => {
     .catch(error => showError(error)) 
 }
 
-const postData = (tripDetails) => {
+const postData = (tripDetails, userID) => {
   return fetch('http://localhost:3001/api/v1/trips', {
     method: 'POST',
     body: JSON.stringify(tripDetails),
@@ -15,7 +15,7 @@ const postData = (tripDetails) => {
     }
   })
     .then(response => checkForErrors(response))
-    .then(() => retrieveData())
+    .then(() => retrieveData(userID))
     .catch(error => showError(error));
 }
 

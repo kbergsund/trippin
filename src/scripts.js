@@ -13,7 +13,6 @@ const retrieveData = (id) => {
     [fetchData(`travelers/${id}`), fetchData('trips'),
       fetchData('destinations')]
   ).then(data => {
-    console.log(data[2]),
     buildTravelerRepo(
       data[0], 
       Object.values(data[1]).flat(), 
@@ -30,10 +29,6 @@ const buildTravelerRepo = (travelerData, tripData, destinationData) => {
 
 // DOM MANIPULATION
 
-// const getRandomIndex = (array) => {
-//   return Math.floor(Math.random() * array.length + 1);
-// };
-
 // Query Selectors
 const userDropdown = document.querySelector('#dropdownContent');
 const currentTrip = document.querySelector('#currentTrip');
@@ -47,6 +42,7 @@ const tripFormCalendar = document.querySelector('#calendar');
 const loginForm = document.querySelector('#login');
 const header = document.querySelector('header');
 const main = document.querySelector('main');
+const loginError = document.querySelector('#loginError')
 
 // Event Listeners
 tripCategories.addEventListener('change', toggleTripView);
@@ -66,16 +62,15 @@ function checkLogin(e) {
   const splitUsername = username.split('r');
   const userID = parseInt(splitUsername[2]);
   const password = loginForm.elements[1].value;
-  if (username.substring(0, 8) === 'traveler' && password === 'traveler'
+  if (username.substring(0, 8) === 'traveler' && password === 'travel'
     && userID > 0 && userID <= 50) {
-    header.style.display = 'block';
+    header.style.display = 'flex';
     main.style.display = 'block';
     loginForm.style.display = 'none';
     retrieveData(userID);
   } else {
-    loginForm.innerHTML += `
-    <p>Incorrect username or password. Please try again.</p>
-    `
+    loginForm.reset();
+    loginError.innerText = 'Incorrect username or password. Please try again.'
   }
 }
 
@@ -83,17 +78,22 @@ function displayCostEstimate() {
   const formValues = formatFormValues();
   if (travelerRepo.estimateTripCost(formValues)) {
     addTripForm.childNodes[3].innerText = 
-      `Estimated Total Cost: ~$${travelerRepo.estimateTripCost(formValues)}`
+      `Estimated Total Cost: $${travelerRepo.estimateTripCost(formValues)}`
+    addTripForm.childNodes[3].style.backgroundColor = '#fff';
   }
 }
 
 function addTrip(e) {
   e.preventDefault();
   const trip = travelerRepo.prepareTripDetails(formatFormValues())
-  postData(trip);
+  postData(trip, travelerRepo.currentTraveler.id);
   addTripForm.reset();
   // ADD SUCCESS MESSAGING- setTimeout??
-  addTripForm.childNodes[3].innerText = ``
+  addTripForm.childNodes[3].innerText = `Trip successfully requested!`;
+  setTimeout(() => {
+    addTripForm.childNodes[3].innerText = ``;
+    addTripForm.childNodes[3].style.backgroundColor = 'transparent';
+  }, 1500);
 }
 
 
@@ -104,9 +104,7 @@ function pageLoadLoginDisplay() {
 }
 
 const generateDOM = () => {
-  // const randomID = getRandomIndex(travelerRepo.allTravelers);
-  // travelerRepo.retrieveTraveler(userID);
-  const traveler = travelerRepo.currentTraveler
+  const traveler = travelerRepo.currentTraveler;
   restrictCalendarMinDate();
   generateFormDestinations();
   displayUserInfo(traveler);
@@ -116,7 +114,7 @@ const generateDOM = () => {
 }
 
 const displayUserInfo = (traveler) => {
-  userDropdown.innerHTML += `
+  userDropdown.innerHTML = `
   <p>${traveler.name}</p>
   <p>I am a: ${traveler.travelerType}</p>
   <p>2021 Total Spend: $${traveler.myTrips.calculateTotalCostThisYear()}<p>
