@@ -12,7 +12,7 @@ export default class Trips {
   formatDates(tripData) {
     tripData.forEach(trip => {
       trip.date = dayjs(trip.date).format('YYYY/MM/DD');
-    })
+    });
   }
 
   calculateTripCost(id) {
@@ -20,7 +20,7 @@ export default class Trips {
     const flights = trip.travelers * trip.estimatedFlightCostPerPerson;
     const lodging = trip.duration * trip.estimatedLodgingCostPerDay;
     const total = flights + lodging;
-    const travelAgent = total * 0.1
+    const travelAgent = total * 0.1;
     return total + travelAgent;
   }
 
@@ -32,7 +32,7 @@ export default class Trips {
         sum += this.calculateTripCost(trip.id);
       }
       return sum;
-    }, 0)
+    }, 0);
     return priceFormatter.format(total);
   }
 
@@ -42,7 +42,7 @@ export default class Trips {
       const num1 = parseInt(a.date.replaceAll('/', ''));
       const num2 = parseInt(b.date.replaceAll('/', ''));
       return num1 - num2;
-    })
+    });
     return sortedTrip.reduce((obj, trip) => {
       if (trip.status !== 'approved') {
         obj.pending.push(trip);
@@ -59,6 +59,6 @@ export default class Trips {
       past: [],
       present: [],
       upcoming: []
-    })
+    });
   }
 }

@@ -26,7 +26,8 @@ describe('TravelerRepo', function() {
   });
 
   it('should sort destinations by destination name', function() {
-    assert.deepEqual(travelerRepo.sortDestinations(destinationData), sortedDestinationData);
+    assert.deepEqual(travelerRepo.sortDestinations(destinationData),
+      sortedDestinationData);
   });
 
   it('should add destination info to all trips', function() {

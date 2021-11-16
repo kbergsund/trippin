@@ -1,6 +1,7 @@
 import chai from 'chai';
 const assert = chai.assert;
-import { tripDestinationData, travelerSpecificTrips, categorizedTravelersTrips } from '../src/data/sampleData.js';
+import { tripDestinationData, travelerSpecificTrips, 
+  categorizedTravelersTrips } from '../src/data/sampleData.js';
 import Trips from '../src/Trips';
 
 describe('Trips', function() {
@@ -29,11 +30,11 @@ describe('Trips', function() {
   })
 
   it('should calculate the cost of a single trip given a trip id', function() {
-    assert.equal(user3Trips.calculateTripCost(3), '4,543')
+    assert.equal(user3Trips.calculateTripCost(3), 4543)
   })
 
   it('should find the total cost of all trips so far this year', function() {
-    assert.equal(trips.totalCost, 8668);
+    assert.equal(trips.totalCost, '8,668');
   });
 
   it('should sort by date & into categories: pending, past, present, upcoming', function() {

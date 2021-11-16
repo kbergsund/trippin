@@ -1,6 +1,6 @@
 import chai from 'chai';
 const assert = chai.assert;
-import { travelerData, tripData, travelerSpecificTrips } from '../src/data/sampleData.js';
+import { travelerData, travelerSpecificTrips } from '../src/data/sampleData.js';
 import Traveler from '../src/Traveler';
 import Trips from '../src/Trips';
 

@@ -1,10 +1,10 @@
 const dayjs = require('dayjs');
-import { retrieveData, formatFormValues, travelerRepo } from './scripts'
+import { retrieveData, formatFormValues, travelerRepo } from './scripts';
 
 // Query Selectors
 const userDropdown = document.querySelector('#dropdownContent');
 const currentTrip = document.querySelector('#currentTrip');
-const tripCategories = document.querySelector('#tripCategories')
+const tripCategories = document.querySelector('#tripCategories');
 const upcoming = document.querySelector('#upcoming');
 const past = document.querySelector('#past');
 const pending = document.querySelector('#pending');
@@ -14,7 +14,7 @@ const tripFormCalendar = document.querySelector('#calendar');
 const travelerLogin = document.querySelector('#login');
 const header = document.querySelector('header');
 const main = document.querySelector('main');
-const loginError = document.querySelector('#loginError')
+const loginError = document.querySelector('#loginError');
 
 // Event Listeners
 tripCategories.addEventListener('change', toggleTripView);
@@ -40,7 +40,7 @@ function checkLogin(e) {
     retrieveData(userID);
   } else {
     travelerLogin.reset();
-    loginError.innerText = 'Incorrect username or password. Please try again.'
+    loginError.innerText = 'Incorrect username or password. Please try again.';
   }
 }
 
@@ -100,7 +100,7 @@ const generateFormDestinations = () => {
     tripFormDestinations.innerHTML += `
     <option>${destination.destination}</option>
     `
-  })
+  });
 }
 
 const displayUserInfo = (traveler) => {
@@ -150,9 +150,9 @@ const generateTripCards = (traveler) => {
         </section>
         `
         addBackgroundImage(trip.id, trip.image)
-      })
+      });
     }
-  })
+  });
 }
 
 const addBackgroundImage = (id, img) => {

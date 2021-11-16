@@ -32,7 +32,7 @@ const addTripForm = document.querySelector('#add-trip-form');
 
 addTripForm.addEventListener('submit', (event) => {
   addTrip(event);
-});
+})
 
 const formatFormValues = () => {
   const elementIndexes = Object.keys(addTripForm.elements);
@@ -44,7 +44,7 @@ const formatFormValues = () => {
       acc.push(addTripForm.elements[number].value);
     }
     return acc;
-  }, [])
+  }, []);
   if (formValues[1].length > 0) {
     formValues[1] = dayjs(formValues[1]).format('YYYY/MM/DD')
   }

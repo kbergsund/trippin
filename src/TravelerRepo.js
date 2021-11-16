@@ -14,7 +14,7 @@ export default class TravelerRepo {
       } else if (a.destination > b.destination) {
         return 1;
       }
-    })
+    });
   }
 
   updateTrips() {
@@ -25,8 +25,8 @@ export default class TravelerRepo {
         if (property !== 'id') {
           trip[property] = destination[property];
         }
-      })
-    })
+      });
+    });
   }
 
   retrieveTravelersTrips(userID) {
@@ -37,7 +37,7 @@ export default class TravelerRepo {
     this.updateTrips();
     this.currentTraveler =
       new Traveler(this.currentTraveler, 
-        this.retrieveTravelersTrips(this.currentTraveler.id))
+        this.retrieveTravelersTrips(this.currentTraveler.id));
     return this.currentTraveler;
   }
 
@@ -55,7 +55,7 @@ export default class TravelerRepo {
     const priceFormatter = new Intl.NumberFormat();
     if (tripDetails.every(value => value.length !== 0)) {
       const requestedDestination = this.allDestinations
-        .find(destination => destination.destination === tripDetails[0])
+        .find(destination => destination.destination === tripDetails[0]);
       const flights = tripDetails[3] *
         requestedDestination.estimatedFlightCostPerPerson;
       const lodging = tripDetails[2] *
