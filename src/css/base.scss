@@ -9,29 +9,88 @@
 }
 
 html {
+  background-color: $primary-background;
+  color: $text-color; 
   font-family: Arial, Helvetica, sans-serif;
   font-size: 24px;
-  color: $text-color; 
-  background-color: $primary-background;
 }
 
 body {
-  min-height: 100vh;
   @include flex-column();
+  min-height: 100vh;
   padding: 1.5em;
 }
 
 main,
 header {
-display: none;
-padding: 1em;
-@include border-radius(50px);
-@include box-shadow(7px, -5px, rgba(33,191,133, 0.25));
+  border-radius: 50px;
+  display: none;
+  @include box-shadow(7px, -5px, rgba(33,191,133, 0.25));
+  padding: 1em;
+}
+
+h1 {
+  color: $darker-green;
+  font-size: 1.4em;
+}
+
+h2 {
+  font-size: 1.1em;
+  margin-top: .4em;
+}
+
+h1,
+h2 {
+  font-weight: 700;
+}
+
+h3 {
+  font-size: .8em;
+}
+
+p {
+  font-size: .65em;
+}
+
+input,
+select {
+  @include height-padding(2.75em, .2em, 1em);
+}
+
+input[type=date] {
+  font-family: inherit;
+}
+
+input,
+select,
+button {
+  &:hover {
+    cursor:pointer;
+  }
+}
+
+button,
+.add-trip-input-fields,
+.trip-categories,
+.current-trip {
+  background-color: $main-green;
 }
 
 input,
 select,
 button,
+.add-trip-input-fields,
+.cost-estimate,
+.dropdown-content,
+.current-trip,
+.trip-info {
+  border-radius: 15px;
+}
+
+input,
+select,
+.traveler-login-form button,
+.add-trip-form button,
 .trip-categories,
 .add-trip-input-fields,
 .current-trip,
@@ -45,40 +104,41 @@ button,
   @include box-shadow(5px, -5px, rgba(0,0,0, 0.5));
 }
 
-h1 {
-  color: $darker-green;
-  font-size: 1.4em;
-  font-weight: 700;
+/* ~~~~~~~~~~ FLEX RULES ~~~~~~~~~~ */
+.header-top-section,
+.add-trip-form,
+.add-trip-input-fields,
+.user-info-dropdown-section {
+  display: flex;
 }
 
-h2 {
-  font-size: 1.1em;
-  font-weight: 700;
-  margin-top: .4em;
+.traveler-login-form,
+header,
+.my-trips-category-dropdown,
+.trip-info,
+.current-destination {
+  @include flex-column();
 }
 
-h3 {
-  font-size: .8em;
+.traveler-login-form,
+.header-top-section,
+.add-trip-form,
+.add-trip-input-fields {
+  @include justify-between-align-center();
 }
 
-p {
-  font-size: .65em;
+header,
+.main-top-section,
+.my-trips-category-dropdown,
+.trip-info {
+  @include flex-justify(space-between);
 }
 
-input,
-select {
-  height: 2.75em;
-  padding: .2em 1em;
-  @include border-radius(15px);
-
-  &:hover {
-    cursor: pointer;
-  }
+.current-destination,
+.trip-info {
+  text-align: right;
 }
 
-input[type=date] {
-  font-family: inherit;
-}
 
 /* ~~~~~~~~~~ LOGIN RULES ~~~~~~~~~~ */
 .traveler-login-section {
@@ -86,19 +146,14 @@ input[type=date] {
 
   .traveler-login-form {
     height: 100%;
-    @include flex-column();
-    @include justify-between-align-center();
   }
 
   button {
     width: 10%;
     height: 2.5em;
-    @include border-radius(15px);
-    background-color: $main-green;
     transition: background-color 200ms ease;
 
     &:hover {
-      cursor: pointer;
       background-color: $darker-green;
     }
   }
@@ -109,35 +164,24 @@ input[type=date] {
 }
 
 /* ~~~~~~~~~~ HEADER RULES ~~~~~~~~~~ */
+
 header {
   background-blend-mode: hard-light;
   background-color: rgba(255, 255, 255, .2);
   background-image: url('../images/mountains-tanyadzu.png');
   background-size: cover;
   background-position: center;
-  @include flex-column();
   height: 8em;
-  justify-content: space-between;
-
-  .header-top-section {
-    display: flex;
-    @include justify-between-align-center();
-  }
 
   .add-trip-form {
     min-height: 3.25em;
-    display: flex;
-    @include justify-between-align-center();
 
     .add-trip-input-fields {
-      padding: 0 .5em;
-      min-height: 80%;
-      width: 75%;
-      display: flex;
-      @include justify-between-align-center();
-      flex-wrap: wrap;
       background-color: $main-green;
-      border-radius: 15px;
+      flex-wrap: wrap;
+      min-height: 80%;
+      padding: 0 .5em;
+      width: 75%;
 
       .destinations {
         width: 30%;
@@ -146,32 +190,26 @@ header {
 
     button {
       background-color: $main-orange;
-      color: #fff;
+      color: $white;
       font-size: .8em;
       font-weight: 700;
-      height: 2.2em;
-      padding: .5em 1.2em;
-      @include border-radius(15px);
+      @include height-padding(2.2em, .5em, 1.2em);
       transition: background-color 200ms ease;
 
       &:hover {
-        cursor: pointer;
         background-color: $lighter-orange;
-        // background-color: scale(#E86D18, $lightness: 30%);
       }
     }
   }
 }
 
 .cost-estimate {
-  @include border-radius(15px);
   padding: .5em;
   text-align: center;
   width: 7em;
 }
 
 .user-info-dropdown-section {
-  display: flex;
   justify-content: flex-end;
 
   img {
@@ -183,41 +221,33 @@ header {
   }
 
   .dropdown-content {
-    position: absolute;
+    background-color: $white;
     display: none;
-    background-color: #fff;
-    @include border-radius(15px);
-    padding: .5em;
-    height: 4em;
     font-size: 1.2em;
-    flex-direction: column;
-    justify-content: space-evenly;
+    @include height-padding(4em, 0, .5em);
+    position: absolute;
   }
-
+  
   &:focus .dropdown-content,
   &:hover .dropdown-content {
-    display: flex;
+    @include flex-column();
+    justify-content: space-evenly;
   }
 }
 
 /* ~~~~~~~~~~ MAIN RULES ~~~~~~~~~~ */
+
 main {
-  background-color: #fff;
+  background-color: $white;
   margin-top: 1.3em;
 
   .main-top-section {
-    height: 4em;
-    display: flex;
-    justify-content: space-between;
-    padding: 0 1em;
+    @include height-padding(4em, 0, 1em);
 
     .my-trips-category-dropdown {
-      @include flex-column();
-      justify-content: space-between;
       min-width: 15%;
 
       .trip-categories {
-        background-color: $main-green;
         transition: background-color 200ms ease;
 
         &:hover {
@@ -227,16 +257,12 @@ main {
     }
 
     .current-trip {
-      background-color: $main-green;
-      @include border-radius(15px);
-      width: 40%;
       padding: 1em;
+      width: 40%;
 
       .current-destination {
-        flex-direction: column;
         align-items: flex-end;
         justify-content: space-evenly;
-        text-align: right;
       }
     }
   }
@@ -252,22 +278,15 @@ main {
       justify-content: center;
   
       section {
-        height: 11em;
-        @include border-radius(25px);
-        padding: .8em;
-        display: flex;
         align-items: flex-end;
-        justify-content: flex-end;
+        border-radius: 25px;
+        @include height-padding(11em, .8em, .8em);
+        @include flex-justify(flex-end);
   
         .trip-info {
-          background-color: #fff;
-          @include border-radius(15px);
-          padding: .5em;
+          background-color: $white;
+          @include height-padding(3.7em, .5em, .5em);
           width: 60%;
-          text-align: right;
-          @include flex-column();
-          justify-content: space-between;
-          height: 3.7em;
         }
       }
     }

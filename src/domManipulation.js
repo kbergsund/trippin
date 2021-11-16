@@ -20,9 +20,6 @@ const loginError = document.querySelector('#loginError')
 tripCategories.addEventListener('change', toggleTripView);
 addTripForm.addEventListener('keyup', displayCostEstimate);
 addTripForm.addEventListener('change', displayCostEstimate);
-// addTripForm.addEventListener('submit', (event) => {
-//   addTrip(event);
-// });
 travelerLogin.addEventListener('submit', (event) => {
   checkLogin(event);
 });
@@ -39,6 +36,7 @@ function checkLogin(e) {
     header.style.display = 'flex';
     main.style.display = 'block';
     travelerLogin.style.display = 'none';
+    travelerLogin.parentNode.style.display = 'none';
     retrieveData(userID);
   } else {
     travelerLogin.reset();

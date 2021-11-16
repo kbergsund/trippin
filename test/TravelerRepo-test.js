@@ -8,7 +8,6 @@ describe('TravelerRepo', function() {
   let travelerRepo;
 
   beforeEach(function() {
-    console.log(tripData);
     travelerRepo = new TravelerRepo(travelerData[2], tripData, destinationData);
   });
 
@@ -32,13 +31,15 @@ describe('TravelerRepo', function() {
   });
 
   it('should retrieve all trips for specific user given a traveler ID', function() {
-    assert.deepEqual(travelerRepo.retrieveTravelersTrips(3)[0], travelerSpecificTrips[2]);
+    assert.deepEqual(travelerRepo.retrieveTravelersTrips(3)[0], 
+      travelerSpecificTrips[2]);
   });
 
   it('should instantiate a Traveler with their specific trips in a Trips object instance', function() {
     travelerRepo.buildTravelers();
     assert.instanceOf(travelerRepo.currentTraveler, Traveler)
-    assert.deepEqual(travelerRepo.currentTraveler.myTrips.trips, travelerSpecificTrips);
+    assert.deepEqual(travelerRepo.currentTraveler.myTrips.trips,
+      travelerSpecificTrips);
   });
 
   it('should retrieve a destination ID given a specific destination name', function() {
