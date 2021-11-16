@@ -51,6 +51,6 @@ describe('TravelerRepo', function() {
   });
 
   it('should estimate a trip\'s cost based on details passed in', function() {
-    assert.equal(travelerRepo.estimateTripCost(sampleTripDetails), 1386)
+    assert.equal(travelerRepo.estimateTripCost(sampleTripDetails), '1,386')
   });
 })

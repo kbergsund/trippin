@@ -25,12 +25,15 @@ export default class Trips {
   }
 
   calculateTotalCostThisYear() {
-    return this.trips.reduce((sum, trip) => {
-      if (dayjs('2021/01/01').isSameOrBefore(trip.date)) {
+    const priceFormatter = new Intl.NumberFormat();
+    const total = this.trips.reduce((sum, trip) => {
+      if (trip.status === 'approved' &&
+        dayjs('2021/01/01').isSameOrBefore(trip.date)) {
         sum += this.calculateTripCost(trip.id);
       }
       return sum;
     }, 0)
+    return priceFormatter.format(total);
   }
 
   categorizeTrips(tripData) {
