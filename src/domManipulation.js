@@ -92,13 +92,14 @@ const displayUserInfo = (traveler) => {
 }
 
 const displayCurrentTrip = (traveler) => {
-  // Not Tested!
+  console.log(traveler.myTrips.categorizedTrips);
   if (traveler.myTrips.categorizedTrips.present.length > 0) {
     const currentDestination = traveler.myTrips.categorizedTrips.present[0];
     currentTrip.childNodes[3].innerHTML = `
-    <h3>${currentDestination.destinationID}<h3>
+    <h3>${currentDestination.destination}<h3>
     <p>${dayjs(currentDestination.date)
     .format('M/D/YYYY')}, ${currentDestination.duration} days<p>
+    <p>${currentDestination.travelers} travelers</p>
     `
   } else {
     currentTrip.childNodes[3].innerHTML = '<p>You\'re not currently traveling. Time to book a trip!<p>'

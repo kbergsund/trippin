@@ -43,11 +43,12 @@ export default class Trips {
     return sortedTrip.reduce((obj, trip) => {
       if (trip.status !== 'approved') {
         obj.pending.push(trip);
-      } else if (dayjs().isAfter(trip.date)) {
+      } else if (dayjs().isAfter(trip.date, 'day')) {
         obj.past.push(trip);
-      } else if (dayjs().isSame(trip.date)) {
-        obj.past.push(trip);
-      } else if (dayjs().isBefore(trip.date)) {
+      } else if (dayjs().isSame(trip.date, 'day')) {
+        console.log('same');
+        obj.present.push(trip);
+      } else if (dayjs().isBefore(trip.date, 'day')) {
         obj.upcoming.push(trip);
       }
       return obj;
