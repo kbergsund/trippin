@@ -1,0 +1,23 @@
+@mixin box-shadow($y, $spread, $color) {
+  box-shadow: 0px $y 20px $spread $color;
+}
+
+@mixin height-padding($height, $num1, $num2) {
+  height: $height;
+  padding: $num1 $num2;
+}
+
+@mixin flex-column() {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin flex-justify($setting) {
+  display: flex;
+  justify-content: $setting;
+}
+
+@mixin justify-between-align-center() {
+  justify-content: space-between;
+  align-items: center;
+}
