@@ -1,6 +1,6 @@
 import chai from 'chai';
 const assert = chai.assert;
-import { travelerData, tripData, destinationData, tripDestinationData, travelerSpecificTrips, sampleTripDetails } from '../src/data/sampleData.js';
+import { travelerData, tripData, destinationData, sortedDestinationData, tripDestinationData, travelerSpecificTrips, sampleTripDetails } from '../src/data/sampleData.js';
 import TravelerRepo from '../src/TravelerRepo';
 import Traveler from '../src/Traveler';
 
@@ -19,10 +19,14 @@ describe('TravelerRepo', function() {
     assert.instanceOf(travelerRepo, TravelerRepo)
   });
 
-  it('should be instantiated with traveler data, trip data, and destination data', function() {
+  it('should be instantiated with traveler data, trip data, and sorted destination data', function() {
     assert.equal(travelerRepo.currentTraveler, travelerData[2]);
     assert.equal(travelerRepo.allTrips, tripData);
-    assert.equal(travelerRepo.allDestinations, destinationData)
+    assert.deepEqual(travelerRepo.allDestinations, sortedDestinationData)
+  });
+
+  it('should sort destinations by destination name', function() {
+    assert.deepEqual(travelerRepo.sortDestinations(destinationData), sortedDestinationData);
   });
 
   it('should add destination info to all trips', function() {

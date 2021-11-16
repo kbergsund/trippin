@@ -147,6 +147,64 @@ const destinationData = [
   }
 ]
 
+const sortedDestinationData = [
+  {
+    id: 16,
+    destination: 'Bangkok, Thailand',
+    estimatedLodgingCostPerDay: 35,
+    estimatedFlightCostPerPerson: 988,
+    image: 'https://images.unsplash.com/photo-1563492065599-3520f775eeed?ixlib=rb-1.2.1&auto=format&fit=crop&w=1567&q=80',
+    alt: 'ornate buildings with a garden during the day'
+  },
+  {
+    id: 6,
+    destination: 'Jakarta, Indonesia',
+    estimatedLodgingCostPerDay: 70,
+    estimatedFlightCostPerPerson: 890,
+    image: 'https://images.unsplash.com/photo-1555333145-4acf190da336?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80',
+    alt: 'lit up city at night'
+  },
+  {
+    id: 25,
+    destination: 'New York, New York',
+    estimatedLodgingCostPerDay: 175,
+    estimatedFlightCostPerPerson: 200,
+    image: 'https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80',
+    alt: 'people crossing the street during the day surrounded by tall buildings and advertisements'
+  },
+  {
+    id: 7,
+    destination: 'Paris, France',
+    estimatedLodgingCostPerDay: 100,
+    estimatedFlightCostPerPerson: 395,
+    image: 'https://images.unsplash.com/photo-1524396309943-e03f5249f002?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1567&q=80',
+    alt: 'city during the day time with eiffel tower'
+  },
+  {
+    id: 22,
+    destination: 'Rome, Italy',
+    estimatedLodgingCostPerDay: 90,
+    estimatedFlightCostPerPerson: 650,
+    image: 'https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80',
+    alt: 'people standing inside a colosseum during the day'
+  },
+  {
+    id: 28,
+    destination: 'San Juan, Puerto Rico',
+    estimatedLodgingCostPerDay: 70,
+    estimatedFlightCostPerPerson: 900,
+    image: 'https://images.unsplash.com/photo-1580237541049-2d715a09486e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2090&q=80',
+    alt: 'white and brown concrete buildings near sea under white clouds during daytime'
+  },
+  {
+    id: 10,
+    destination: 'Toronto, Canada',
+    estimatedLodgingCostPerDay: 90,
+    estimatedFlightCostPerPerson: 450,
+    image: 'https://images.unsplash.com/photo-1535776142635-8fa180c46af7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2756&q=80'
+  }
+]
+
 const tripDestinationData = [
   {
     id: 117,
@@ -362,6 +420,7 @@ export {
   travelerData,
   tripData,
   destinationData,
+  sortedDestinationData,
   tripDestinationData,
   travelerSpecificTrips,
   categorizedTravelersTrips,
