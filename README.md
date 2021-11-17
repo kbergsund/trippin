@@ -45,10 +45,11 @@ Javascript, HTML, Sass, Webpack, day.js
 
 5. If, for any reason, there is an issue with the request/response cycle on load or when adding a trip, proper error messaging will display.
 
-## Future Improvements
-* Add better responsiveness
+## Future Directions
+* Improve responsiveness
 * Add animations on button hover states
 * Add flip card feature for trip cards with individual cost estimates on the back
+* Expand current trip destination functionality to test trip end date- currently only displays as present on departure date
 
 ## Project Spec & Rubric
 [Here](https://frontend.turing.edu/projects/travel-tracker.html)
