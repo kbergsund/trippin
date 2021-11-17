@@ -39,11 +39,11 @@ Javascript, HTML, Sass, Webpack, day.js
  
 ![addtrip](https://user-images.githubusercontent.com/49960644/142085649-1da4fc5e-d205-4fe7-bde2-48e688e98dee.gif)
 
-6. Travelers can navigate between viewing their upcoming, past, or pending trips via the dropdown in the 'My Trips' section. Each trip is represented by a rectangular widget. The B&W background image gives clients an enticing visual of the location. Information present is the destination name, departure/start date & duration, and number of travelers.
+4. Travelers can navigate between viewing their upcoming, past, or pending trips via the dropdown in the 'My Trips' section. Each trip is represented by a rectangular widget. The B&W background image gives clients an enticing visual of the location. Information present is the destination name, departure/start date & duration, and number of travelers.
 
 ![categories](https://user-images.githubusercontent.com/49960644/142086015-6e0f9337-da59-480d-a8b5-e8a639cfea5d.gif)
 
-8. If, for any reason, there is an issue with the request/response cycle on load or when adding a trip, proper error messaging will display.
+5. If, for any reason, there is an issue with the request/response cycle on load or when adding a trip, proper error messaging will display.
 
 ## Future Improvements
 * Add better responsiveness
