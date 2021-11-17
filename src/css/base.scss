@@ -273,7 +273,7 @@ main {
     .upcoming,
     .past,
     .pending {
-      grid-template-columns: repeat(auto-fill, minmax(300px, 40%));
+      grid-template-columns: repeat(auto-fill, minmax(300px, 30%));
       grid-gap: 2em;
       justify-content: center;
   
