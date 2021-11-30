@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>trippin</title>
+</head>
+<body>
+  <header>
+    <div class="header-top-section">
+      <h1>trippin</h1>
+      <div class="user-info-dropdown-section" tabindex="0">
+        <button class="show-dropdown-content" type="button"><img src="./images/user.svg" alt="user icon"></button>
+        <div class="dropdown-content" id="dropdownContent">
+        </div>
+      </div>
+    </div>
+    <form class="add-trip-form" id="add-trip-form">
+      <div class="add-trip-input-fields">
+        <select class="destinations" id="destinations" required>
+          <option hidden>Destinations</option>
+        </select>
+        <input aria-label="Trip start date" placeholder="Departure" id="calendar" type="text" onfocus="(this.type='date')">
+        <input aria-label="Number of days" type="number" min="1" placeholder="Days" required>
+        <input aria-label="Number of people" type="number" min="1" placeholder="People" required>
+      </div>
+      <p class="cost-estimate"></p>
+      <button type="submit" id="submitButton" aria-label="submit-trip-request-button">Request</button>
+    </form>
+  </header>
+  <main>
+    <div class="main-top-section">
+      <div class="my-trips-category-dropdown">
+        <h2>My Trips</h2>
+        <select name="trip-categories" class="trip-categories" id="tripCategories">
+          <option value="upcoming">Upcoming</option>
+          <option value="past">Past</option>
+          <option value="pending">Pending</option>
+        </select>
+      </div>
+      <section class="current-trip" id="currentTrip">
+        <p>Currently...</p>
+        <section class="current-destination">
+        </section>
+      </section>
+    </div>
+    <section class="trips">
+      <section class="upcoming" id="upcoming">
+      </section>
+      <section class="past" id="past">
+      </section>
+      <section class="pending" id="pending">
+      </section>
+    </section>
+  </main>
+  <section class="traveler-login-section">
+    <form class="traveler-login-form" id="login">
+      <h1>trippin</h1>
+      <p>Traveler Login</p>
+      <input aria-label="Username" type="text" placeholder="Username" required>
+      <input aria-label="Password" type="password" placeholder="Password" required>
+      <button type="submit">Log In</button>
+      <p id="loginError"></p>
+    </form>
+  </section>
+  <script src="bundle.js"></script>
+</body>
+</html>
