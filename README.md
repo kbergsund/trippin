@@ -8,7 +8,7 @@ Turing School of Software & Design
 ## Abstract
 Trippin is a place for both planning new and remembering old adventures. Built from scratch via APIs with traveler, trip, and destination data, it simulates a travel agency's client-facing web app. Clients, or members, visit the site, log in with their unique id number, and can review past, pending, and approved upcoming trips. They can request to book a new trip from a large assortment of destinations by filling out a form at the top. 
 
-## Languages/Technoligy
+## Languages/Technology
 Javascript, HTML, Sass, Webpack, day.js
 
 ## Learning Goals
